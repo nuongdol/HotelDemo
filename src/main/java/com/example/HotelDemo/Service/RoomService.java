@@ -36,17 +36,15 @@ public class RoomService implements IRoomService{
 
     @Override
     public List<Room> findRoomByStatus(String status) {
-        if(status == "empty"||status == "full"){
-            List<Room> rooms = roomRepository.findARoomByStatus(status);
-            return rooms;
+        if(status.equals("empty") ||status.equals("full")){
+            return roomRepository.findARoomByStatus(status);
         }
         return null;
     }
 
     @Override
     public Room findRoomByIdRoom(Integer idRoom) {
-        Room room = roomRepository.findARoomById(idRoom);
-        return room;
+        return roomRepository.findARoomById(idRoom);
     }
 
     @Override
