@@ -1,6 +1,5 @@
 package com.example.HotelDemo.Repository;
 import com.example.HotelDemo.Model.Booking;
-import com.example.HotelDemo.Model.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +14,4 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     Booking findABookingById(@Param("idBooking")Integer idBooking);
     @Query(value = queryAllBookings, nativeQuery = true)
     List<Booking> findAllBookings();
-
-
-
 }

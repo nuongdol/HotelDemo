@@ -1,11 +1,9 @@
 package com.example.HotelDemo.Service;
 
 import com.example.HotelDemo.Model.Booking;
-import com.example.HotelDemo.Model.Room;
 import com.example.HotelDemo.Repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

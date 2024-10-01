@@ -67,6 +67,6 @@ public class HotelController {
         if(deleteHotel != null){
             hotelService.deleteHotelById(deleteHotel);
         }
-        return ResponseEntity.ok("Delete room " + deleteHotel);
+        return ResponseEntity.ok("Delete hotel " + deleteHotel);
     }
 }

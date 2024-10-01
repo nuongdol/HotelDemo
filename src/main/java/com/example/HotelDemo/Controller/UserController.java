@@ -1,7 +1,6 @@
 package com.example.HotelDemo.Controller;
 
 import com.example.HotelDemo.Exception.CheckoutUser;
-import com.example.HotelDemo.Model.Room;
 import com.example.HotelDemo.Model.User;
 import com.example.HotelDemo.Service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +73,6 @@ public class UserController {
         if(deleteUser!= null){
             userService.deleteUser(deleteUser);
         }
-        return ResponseEntity.ok("Delete room " + deleteUser);
+        return ResponseEntity.ok("Delete user " + deleteUser);
     }
 }
