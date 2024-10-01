@@ -8,8 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-
 import static com.example.HotelDemo.sql.QueryRewrite.*;
 
 @Repository
@@ -18,5 +16,4 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     User findAUserById(@Param("idUser")Integer idUser);
     @Query(value = queryAllUsers, nativeQuery = true)
     List<User> findAllUsers();
-
 }

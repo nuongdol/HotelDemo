@@ -60,6 +60,10 @@ public class BookingController {
         if(updateBooking.getStartTime() == null || updateBooking.getStartTime() != booking.getStartTime()){
             updateBooking.setStartTime(booking.getStartTime());
         }
+        if(updateBooking.getPaymentMethod() == null ||
+                updateBooking.getPaymentMethod() != booking.getPaymentMethod()){
+            updateBooking.setPaymentMethod(booking.getPaymentMethod());
+        }
         return ResponseEntity.ok(updateBooking);
     }
 

@@ -5,7 +5,13 @@ import com.example.HotelDemo.Repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.IOException;
+import java.lang.management.MemoryUsage;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -30,7 +36,17 @@ public class RoomService implements IRoomService{
     @Override
     public Room addRoom(Room room) {
         Room newRoom = new Room(room.getRoomId(), room.getRoomName(), room.getRoomType(),
-                room.getRoomCapacity(), room.getRoomPrice(), room.getRoomDescription(), room.getRoomStatus());
+                room.getRoomCapacity(), room.getRoomPrice(), room.getRoomDescription(), room.getRoomStatus(), room.getRoomImage());
+        return roomRepository.save(newRoom);
+    }
+    public Room addRoomWithImage(MultipartFile file) throws IOException, SQLException {
+        Room newRoom = new Room();
+        if(!file.isEmpty()) {
+            byte[] photoBytes = file.getBytes();
+            Blob photoBlob = new SerialBlob(photoBytes);
+            newRoom.setRoomImage(photoBlob);
+
+        }
         return roomRepository.save(newRoom);
     }
 

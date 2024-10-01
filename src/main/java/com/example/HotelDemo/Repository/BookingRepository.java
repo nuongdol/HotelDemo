@@ -11,10 +11,10 @@ import static com.example.HotelDemo.sql.QueryRewrite.*;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
-    @Query(value = queryAHotel, nativeQuery = true)
-    Hotel findAHotelById(@Param("idHotel")Integer idHotel);
-    @Query(value = queryAllHotels, nativeQuery = true)
-    List<Hotel> findAllHotels();
+    @Query(value = queryABooking, nativeQuery = true)
+    Booking findABookingById(@Param("idBooking")Integer idBooking);
+    @Query(value = queryAllBookings, nativeQuery = true)
+    List<Booking> findAllBookings();
 
 
 

@@ -16,7 +16,7 @@ public class QueryRewrite {
     public static final String queryAUserByUserEmail = "select * from user where user_email =:idUserEmail";
 
     //Booking
-    public static final String getQueryABooking = "select * from booking where booking_id =:idBooking";
+    public static final String queryABooking = "select * from booking where booking_id =:idBooking";
     public static final String queryAllBookings = "select * from booking";
 
 }

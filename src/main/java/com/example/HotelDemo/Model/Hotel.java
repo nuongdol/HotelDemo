@@ -3,6 +3,8 @@ package com.example.HotelDemo.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Blob;
+
 @Entity
 @Setter
 @Getter
@@ -19,4 +21,7 @@ public class Hotel {
     private String HotelAddress;
     @Column(name="city")
     private String HotelCity;
+    @Lob
+    @Column(name = "imageH")
+    private Blob HotelImage;
 }

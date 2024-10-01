@@ -3,6 +3,9 @@ package com.example.HotelDemo.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.sql.Blob;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +23,12 @@ public class Room {
     @Column(name= "capacity")
     private String roomCapacity;
     @Column(name= "price")
-    private String roomPrice;
+    private BigDecimal roomPrice;
     @Column(name="description")
     private String roomDescription;
     @Column(name="status")
     private String roomStatus;
+    @Lob
+    @Column(name = "imageR")
+    private Blob roomImage;
 }
