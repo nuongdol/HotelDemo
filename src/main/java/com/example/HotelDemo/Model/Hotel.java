@@ -3,7 +3,6 @@ package com.example.HotelDemo.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Blob;
 
 @Entity
 @Setter
@@ -14,14 +13,18 @@ import java.sql.Blob;
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int HotelId;
-    @Column(name = "name")
-    private String HotelName;
+    @Column(name = "hotel_id")
+    private Long hotelId;
+
+    @Column(name = "hotel_name")
+    private String hotelName;
+
     @Column(name = "address")
-    private String HotelAddress;
+    private String hotelAddress;
+
     @Column(name="city")
-    private String HotelCity;
-    @Lob
-    @Column(name = "imageH")
-    private Blob HotelImage;
+    private String hotelCity;
+
+    @Column(name = "hotel_image")
+    private String hotelImage;
 }

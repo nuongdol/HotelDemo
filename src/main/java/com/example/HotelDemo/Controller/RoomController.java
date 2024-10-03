@@ -1,91 +1,115 @@
 package com.example.HotelDemo.Controller;
 
 import com.example.HotelDemo.Exception.CheckoutRoom;
+import com.example.HotelDemo.Model.Dto.RoomDto;
 import com.example.HotelDemo.Model.Room;
 import com.example.HotelDemo.Service.RoomService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/room")
 @RequiredArgsConstructor
 public class RoomController {
+    @Autowired
     private final RoomService roomService;
+    private final ModelMapper modelMapper;
 
     //add a new room
     @PostMapping("/add/new-room")
-    public ResponseEntity<?> addNewRoom(@RequestBody Room room){
-            if(room != null){
-                Room add = roomService.addRoom(room);
-                return ResponseEntity.ok(add);
+    public ResponseEntity<?> addNewRoom(@RequestBody RoomDto roomDto){
+            if(roomDto != null){
+                //convert dto to entity
+                Room room = modelMapper.map(roomDto, Room.class);
+
+                roomService.addNewRoomService(room);
+
+                return ResponseEntity.ok().body(room);
             }
             return ResponseEntity.badRequest().build();
     }
+
+
     //get all rooms
     @GetMapping("/get-all-rooms")
-    public ResponseEntity<List<Room>> getAllRooms() throws IOException, SQLException{
-            List<Room> getAll = roomService.getAllRooms();
-        return ResponseEntity.ok(getAll);
+    public ResponseEntity<List<RoomDto>> getAllRooms()
+            throws IOException, SQLException{
+            List<RoomDto> allRoomsDto = roomService.getAllRoomsService().stream()
+                    .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors
+                            .toList());
+        return ResponseEntity.ok().body(allRoomsDto);
     }
+
+
     //get a room
-    @GetMapping("/get-a-room/{id}")
-    public ResponseEntity<?> getARoom(@PathVariable(name = "id") Integer idRoom) throws IOException, SQLException{
+    @GetMapping("/get-room/{id}")
+    public ResponseEntity<?> getRoomById(@PathVariable(name = "id") long roomId)
+            throws IOException, SQLException{
         try{
-            Room room = roomService.getARoom(idRoom);
-            return ResponseEntity.ok(room);
+            Room room = roomService.getRoomByIdService(roomId);
+
+            //convert entity to Dto
+            RoomDto roomDto = modelMapper.map(room, RoomDto.class);
+
+            return ResponseEntity.ok().body(roomDto);
 
         }catch (CheckoutRoom e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    //get all room with status
+
+
+    //get all room by status
     @GetMapping("/get-status-rooms")
-    public ResponseEntity<List<Room>> getStatusRooms(@PathParam("status") String status) throws IOException, SQLException{
-        List<Room> roomList =  roomService.findRoomByStatus(status);
-        return ResponseEntity.ok(roomList);
+    public ResponseEntity<List<RoomDto>> getStatusRooms(@PathParam("status") String status) throws IOException, SQLException{
+        List<RoomDto> roomList =  roomService.findRoomByStatus(status).stream().map(
+                room -> modelMapper.map(room,RoomDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(roomList);
     }
 
     //update a room
     @PutMapping("/update-room/{id}")
-    public ResponseEntity<?> updateRoom(@PathVariable(name = "id") Integer idRoom, @RequestBody Room room)
+    public ResponseEntity<?> updateRoom(@PathVariable(name = "id") long roomId, @RequestBody RoomDto roomDto)
             throws IOException, SQLException{
-        Room updateRoom = roomService.findRoomByIdRoom(idRoom);
-        if(updateRoom.getRoomCapacity() != room.getRoomCapacity() || updateRoom.getRoomStatus() == null){
-            updateRoom.setRoomCapacity(room.getRoomCapacity());
-        }
-        if(updateRoom.getRoomStatus() == null || updateRoom.getRoomStatus() != room.getRoomStatus()){
-            updateRoom.setRoomStatus(room.getRoomStatus());
-        }
-        if(updateRoom.getRoomName() == null || updateRoom.getRoomName() != room.getRoomName()){
-            updateRoom.setRoomName(room.getRoomName());
-        }
-        if(updateRoom.getRoomType() == null || updateRoom.getRoomType() != room.getRoomType()){
-            updateRoom.setRoomType(room.getRoomType());
-        }
-        if (updateRoom.getRoomPrice() == null || updateRoom.getRoomPrice() != room.getRoomPrice()){
-            updateRoom.setRoomPrice(room.getRoomPrice());
-        }
-        if(updateRoom.getRoomDescription() == null || updateRoom.getRoomDescription() != room.getRoomDescription()){
-            updateRoom.setRoomDescription(room.getRoomDescription());
-        }
-        if (updateRoom.getRoomCapacity() == null || updateRoom.getRoomCapacity() != room.getRoomCapacity()){
-            updateRoom.setRoomCapacity(room.getRoomCapacity());
-        }
-        return ResponseEntity.ok(updateRoom);
+        //convert dto to entity
+        Room room = modelMapper.map(roomDto, Room.class);
+
+        Room room1 = roomService.updateRoomService(roomId, room);
+
+        //convert entity to dto
+        RoomDto roomResponse = modelMapper.map(room1, RoomDto.class);
+
+        return ResponseEntity.ok().body(roomResponse);
     }
+
+
     //delete a room
-    @DeleteMapping("/delete/room/{id}")
-    public ResponseEntity<?> deleteRoom(@PathVariable(name = "id") Integer idRoom) throws IOException, SQLException{
-        Room deleteRoom = roomService.findRoomByIdRoom(idRoom);
-        if(deleteRoom != null){
-            roomService.deleteRoomById(deleteRoom);
-        }
-        return ResponseEntity.ok("Delete room " + deleteRoom);
+    @DeleteMapping("/delete-room/{id}")
+    public ResponseEntity<?> deleteRoom(@PathVariable(name = "id") long roomId)
+            throws IOException, SQLException{
+        roomService.deleteRoomService(roomId);
+
+        return ResponseEntity.ok("Delete room.");
     }
+
+    //get room hotel by Id
+    @GetMapping("/get-room-hotel/{id}")
+    public ResponseEntity<List<RoomDto>> getHotelRoomsById(@PathVariable(name = "id") long roomId)
+            throws IOException, SQLException{
+        List<RoomDto> roomList =  roomService.findHotelRoomService(roomId).stream().
+                map(room->modelMapper.map(room, RoomDto.class)).collect(Collectors
+                .toList());
+        return ResponseEntity.ok().body(roomList);
+    }
+
+
 }

@@ -3,6 +3,7 @@ package com.example.HotelDemo.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -14,50 +15,25 @@ import java.time.LocalDate;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bookingId;
+    @Column(name = "booking_id")
+    private Long bookingId;
 
-    @Column(name = "userId")
-    private int userId;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Column(name = "roomId")
-    private int roomId;
+    @Column(name = "room_id")
+    private Long roomId;
 
-    @Column(name = "startTime")
-    private LocalDate startTime;
+    @Column(name = "checkin_date")
+    private LocalDate checkinDate;
 
-    @Column(name = "endTime")
-    private LocalDate endTime;
+    @Column(name = "checkout_date")
+    private LocalDate checkoutDate;
 
-    @Column(name = "guest_FullName")
-    private String guestFullName;
+    private BigDecimal totalPrice;
 
-    @Column(name = "guest_Email")
-    private String guestEmail;
+    @Column(name = "booking_status")
+    private String bookingStatus;
 
-    @Column(name = "adults")
-    private int NumOfAdults;
-
-    @Column(name = "children")
-    private int NumOfChildren;
-
-    @Column(name = "total_guest")
-    private int totalNumOfGuest;
-
-    @Column(name = "confirmation_Code")
-    private String bookingConfirmationCode;//ma dat phong
-    @Column(name = "method")
-    private String paymentMethod;
-
-    private void SumNumOfGuest(){
-        this.totalNumOfGuest = this.totalNumOfGuest + this.NumOfAdults;
-    }
-    public void setNumOfAdults(int numOfAdults){
-        this.NumOfAdults = numOfAdults;
-        SumNumOfGuest();
-    }
-    public void setNumOfChildren(int numOfChildren){
-        this.NumOfChildren = numOfChildren;
-        SumNumOfGuest();
-    }
 
 }

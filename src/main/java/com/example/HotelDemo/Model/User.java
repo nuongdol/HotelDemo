@@ -12,16 +12,19 @@ import lombok.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private int UserId;
-    @Column(name = "username")
-    private String UserName;
-    @Column(name = "password")
-    private String Password;
-    @Column(name = "email")
-    private String Email;
-    @Column(name="phone")
-    private String Phone;
-    @Column(name = "address")
-    private String Address;
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "user_name")
+    private String userName;
+
+    private String password;
+
+    private String email;
+
+    private String phone;
+
+    private String address;
+
 }
 

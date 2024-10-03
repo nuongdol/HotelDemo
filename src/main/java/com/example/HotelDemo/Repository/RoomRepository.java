@@ -6,17 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import java.util.Set;
 import static com.example.HotelDemo.sql.QueryRewrite.*;
 
 @Repository
-public interface RoomRepository extends JpaRepository <Room, Integer>{
-
-    @Query(value = queryARoom, nativeQuery = true)
-    Room findARoomById(@Param("idRoom")Integer idRoom);
-    @Query(value = queryAllRooms, nativeQuery = true)
-    Set<Room> findAllRooms();
+public interface RoomRepository extends JpaRepository <Room, Long>{
     @Query(value = queryARoomByStatus, nativeQuery = true)
-    List<Room> findARoomByStatus(@Param("status") String status);
+    List<Room> findRoomByStatus(@Param("status") String status);
+
+    @Query(value = queryHotelAndRoom, nativeQuery = true)
+    List<Room> findHotelAndRoom(@Param("roomId") Long roomId);
 
 }
