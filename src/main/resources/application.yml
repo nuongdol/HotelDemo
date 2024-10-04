@@ -1,5 +1,5 @@
 #config .yml
-# spring.application.name=HotelDemo
+# spring.application.name=hotelDemo
 server:
   port: 8080
 
