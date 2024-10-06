@@ -1,4 +1,4 @@
-package com.example.HotelDemo.sql;
+package com.example.hotelDemo.sql;
 
 public class QueryRewrite {
     //Room

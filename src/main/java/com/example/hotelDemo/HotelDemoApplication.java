@@ -1,4 +1,4 @@
-package com.example.HotelDemo;
+package com.example.hotelDemo;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

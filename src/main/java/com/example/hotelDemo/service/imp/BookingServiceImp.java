@@ -1,12 +1,12 @@
-package com.example.HotelDemo.Service.imp;
+package com.example.hotelDemo.service.imp;
 
-import com.example.HotelDemo.Model.Booking;
-import com.example.HotelDemo.Model.Dto.DetailedBookingDto;
-import com.example.HotelDemo.Model.Dto.RoomBookingDto;
-import com.example.HotelDemo.Model.Dto.RoomUserBookingDto;
-import com.example.HotelDemo.Model.Dto.UserBookingDto;
-import com.example.HotelDemo.Repository.BookingRepository;
-import com.example.HotelDemo.Service.BookingService;
+import com.example.hotelDemo.model.Booking;
+import com.example.hotelDemo.model.Dto.DetailedBookingDto;
+import com.example.hotelDemo.model.Dto.RoomBookingDto;
+import com.example.hotelDemo.model.Dto.RoomUserBookingDto;
+import com.example.hotelDemo.model.Dto.UserBookingDto;
+import com.example.hotelDemo.repository.BookingRepository;
+import com.example.hotelDemo.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
