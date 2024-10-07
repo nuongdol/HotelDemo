@@ -24,17 +24,16 @@ public class RoomController {
 
     //add a new room
     @PostMapping("/add")
-    @Operation(summary = "add new room")
+
     public void addNewRoom(@RequestBody @Validated RoomDto roomDto) {
-        roomService.addNewRoomService(roomDto);
+        roomService.addNewRoom(roomDto);
     }
 
     //get all rooms
     @GetMapping("/get-all")
-    @Operation(summary = "get all room")
 
     public List<RoomDto> getAllRooms() {
-        return roomService.getAllRoomsService().stream()
+        return roomService.getAllRooms().stream()
                 .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors
                         .toList());
 
@@ -42,20 +41,19 @@ public class RoomController {
 
     //get a room
     @GetMapping("/get/{id}")
-    @Operation(summary = "get room by Id")
 
     public RoomDto getRoomById(@PathVariable(name = "id") Long roomId) {
-        return roomService.getRoomByIdService(roomId);
+        return roomService.getRoomById(roomId);
 
     }
 
 
     //get all room by status
-    @GetMapping("/get-status-rooms")
+    @GetMapping("/get-rooms/{status}")
     @Operation(summary = "get room by status")
 
-    public List<RoomDto> getStatusRooms(@PathParam("status") String status) {
-        return roomService.getRoomByStatusService(status).stream().map(
+    public List<RoomDto> getStatusRooms(@PathVariable("status") String status) {
+        return roomService.getRoomByStatus(status).stream().map(
                 room -> modelMapper.map(room, RoomDto.class)).collect(Collectors.toList());
 
     }
@@ -65,13 +63,13 @@ public class RoomController {
     @Operation(summary = "update room")
 
     public void updateRoom(@RequestBody @Validated RoomDto roomDto) {
-        roomService.updateRoomService(roomDto);
+        roomService.updateRoom(roomDto);
     }
 
     //delete a room
     @DeleteMapping("/delete/{id}")
     public void deleteRoom(@PathVariable(name = "id") Long roomId){
-        roomService.deleteRoomService(roomId);
+        roomService.deleteRoom(roomId);
     }
 
     //get room hotel by Id

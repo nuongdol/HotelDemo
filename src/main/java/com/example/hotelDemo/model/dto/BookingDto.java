@@ -1,8 +1,10 @@
 package com.example.hotelDemo.model.dto;
 
 import lombok.Data;
+import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class BookingDto {
@@ -28,5 +30,13 @@ public class BookingDto {
     private String paymentMethod;
 
     private String bookingStatus;
+
+    @Getter
+    private List<RoomDto> rooms;
+
+    public int NumberOfGuest(Integer numberOfChildren, Integer numberOfAdults) {
+        this.totalNumberOfGuest = numberOfChildren + numberOfAdults;
+            return totalNumberOfGuest;
+    }
 
 }

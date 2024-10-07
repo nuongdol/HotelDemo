@@ -1,31 +1,35 @@
 package com.example.hotelDemo.model.dto;
 
-import lombok.Data;
+
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomBookingDto {
 
-    private Long bookingId;
+    Long BookingId;
 
-    private Long roomId;
+    Long RoomId;
 
-    private LocalDate checkinDate;
+    LocalDate CheckinDate;
 
-    private LocalDate checkoutDate;
+    LocalDate CheckoutDate;
 
-    private BigDecimal totalPrice;
+    BigDecimal TotalPrice;
 
-    private String bookingStatus;
+    String BookingStatus;
 
-    private String roomName;
+    String RoomName;
 
-    private String roomType;
+    String RoomType;
 
-    private String roomCapacity;
+    String RoomCapacity;
 
-    private BigDecimal roomPrice;
+    BigDecimal RoomPrice;
+
+    String RoomStatus;
 
 }

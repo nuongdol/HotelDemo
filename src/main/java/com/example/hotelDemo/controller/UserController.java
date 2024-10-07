@@ -1,6 +1,7 @@
 package com.example.hotelDemo.controller;
 
 
+import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import com.example.hotelDemo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,43 +27,45 @@ public class UserController {
 
     //add a new user
     @PostMapping("/add")
-    @Operation(summary = "add new User", description = "user exist")
 
     public void addNewUser(@RequestBody @Validated UserDto userDto) {
-        userService.addNewUserService(userDto);
+        userService.addNewUser(userDto);
     }
 
     //get all users
     @GetMapping("/get-all")
-    @Operation(summary = "get all users")
 
     public List<UserDto> getAllUsers() {
-        return userService.getAllUsersService().stream().map(user -> modelMapper.map(user, UserDto.class))
+        return userService.getAllUsers().stream().map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());
 
     }
 
     //get a user
     @GetMapping("/get/{id}")
-    @Operation(summary = "get a user by Id")
 
     public UserDto getUserById(@PathVariable(name = "id") Long userId) {
-        return userService.getUserByIdService(userId);
+        return userService.getUserById(userId);
     }
 
     //update a user
     @PutMapping("/update")
-    @Operation(summary = "update user by Id")
 
     public void updateUser(@RequestBody @Validated UserDto userDto) {
-        userService.updateUserService(userDto);
+        userService.updateUser(userDto);
     }
 
     //delete a user
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "delete user by Id")
 
     public void deleteUserById(@PathVariable(name = "id") Long userId) {
-        userService.deleteUserService(userId);
+        userService.deleteUser(userId);
+    }
+
+    //get detail
+    @GetMapping("/get-detail/{id}")
+    @Operation(description = "get detail room and booking by using userId")
+    public List<IUserBookingRoomDto> getUserBookingRoom(@PathVariable(name = "id") Long userId) {
+        return userService.getBookingRoomByUserId(userId);
     }
 }

@@ -4,33 +4,33 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data
-public class RoomHotelDto {
 
-    private String hotelName;
+public interface RoomHotelDto {
 
-    private String hotelAddress;
+     String getHotelName();
 
-    private String hotelCity;
+     String getHotelAddress();
 
-    private String hotelImage;
+     String getHotelCity();
 
-    private Long roomId;
+     String getHotelImage();
 
-    private Long hotelId;
+     Long getRoomId();
 
-    private String roomName;
+     Long getHotelId();
 
-    private String roomType;
+     String getRoomName();
 
-    private String roomCapacity;
+     String getRoomType();
 
-    private BigDecimal roomPrice;
+     String getRoomCapacity();
 
-    private String roomDescription;
+    BigDecimal getRoomPrice();
 
-    private String roomStatus;
+    String getRoomDescription();
 
-    private String roomImage;
+    String getRoomStatus();
+
+    String getRoomImage();
 
 }

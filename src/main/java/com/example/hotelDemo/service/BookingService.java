@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface BookingService {
 
-    void addNewBookingService(Long roomId, BookingDto bookingDto);
+    void addNewBooking(BookingDto bookingDto);
 
-    void updateBookingService(BookingDto bookingDto);
+    void updateBooking(BookingDto bookingDto);
 
-    List<BookingDto> getAllBookingsService();
+    List<BookingDto> getAllBookings();
 
-    BookingDto getBookingByIdService(Long bookingId);
+    BookingDto getBookingById(Long bookingId);
 
-    void deleteBookingService(Long bookingId);
+    void deleteBooking(Long bookingId);
 }

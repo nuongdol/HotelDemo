@@ -2,6 +2,7 @@ package com.example.hotelDemo.service.imp;
 
 import com.example.hotelDemo.exception.ResourceNotFoundException;
 import com.example.hotelDemo.model.User;
+import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import com.example.hotelDemo.repository.UserRepository;
 import com.example.hotelDemo.service.UserService;
@@ -20,21 +21,21 @@ public class UserServiceImp implements UserService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void addNewUserService(UserDto userDto) {
+    public void addNewUser(UserDto userDto) {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
         userRepository.save(user);
     }
 
     @Override
-    public List<UserDto> getAllUsersService() {
+    public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(user -> modelMapper.map(user,UserDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserDto getUserByIdService(Long userId) {
+    public UserDto getUserById(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         UserDto userDto = new UserDto();
         user.ifPresent(value -> BeanUtils.copyProperties(value, userDto));
@@ -42,7 +43,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void updateUserService(UserDto userDto) {
+    public void updateUser(UserDto userDto) {
         Optional<User> user = userRepository.findById(userDto.getUserId());
         User userUpdate = new User();
         if(user.isPresent()){
@@ -55,7 +56,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void deleteUserService(Long userId) {
+    public void deleteUser(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()){
             userRepository.deleteById(userId);
@@ -63,5 +64,10 @@ public class UserServiceImp implements UserService {
             throw new ResourceNotFoundException("User not found");
         }
 
+    }
+
+    @Override
+    public List<IUserBookingRoomDto> getBookingRoomByUserId(Long userId) {
+        return userRepository.findBookingAndRoomByUserId(userId);
     }
 }

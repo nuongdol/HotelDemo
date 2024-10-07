@@ -1,5 +1,6 @@
 package com.example.hotelDemo.model.dto;
 
+;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -46,4 +47,14 @@ public class RoomUserBookingDto {
     private String address;
 
     private String password;
+
+    private String hotelName;
+
+    private String hotelAddress;
+
+    private String hotelCity;
+
+    private String hotelImage;
+
+    private String hotelStatus;
 }

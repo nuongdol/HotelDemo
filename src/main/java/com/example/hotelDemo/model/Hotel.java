@@ -33,5 +33,4 @@ public class Hotel {
     @Column(name = "status")
     String hotelStatus;
 
-
 }

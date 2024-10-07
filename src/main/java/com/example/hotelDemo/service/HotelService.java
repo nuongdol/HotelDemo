@@ -2,17 +2,22 @@ package com.example.hotelDemo.service;
 
 
 import com.example.hotelDemo.model.dto.HotelDto;
+import com.example.hotelDemo.model.dto.IRoomBookingDto;
+import com.example.hotelDemo.model.dto.RoomBookingDto;
+
 import java.util.List;
 
 public interface HotelService {
 
-    void addNewHotelService(HotelDto hotelDto);
+    void addNewHotel(HotelDto hotelDto);
 
-    void updateHotelService(HotelDto hotelDto);
+    void updateHotel(HotelDto hotelDto);
 
-    List<HotelDto> getAllHotelsService();
+    List<HotelDto> getAllHotels();
 
-    HotelDto getHotelByIdService(Long hotelId);
+    HotelDto getHotelById(Long hotelId);
 
-    void deleteHotelService(Long hotelId);
+    void deleteHotel(Long hotelId);
+
+    List<IRoomBookingDto> getDetailByHotelId(Long hotelId);
 }

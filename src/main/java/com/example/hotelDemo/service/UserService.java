@@ -1,19 +1,22 @@
 package com.example.hotelDemo.service;
 
 
+import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import java.util.List;
 
 
 public interface UserService {
 
-    void addNewUserService(UserDto userDto);
+    void addNewUser(UserDto userDto);
 
-    List<UserDto> getAllUsersService();
+    List<UserDto> getAllUsers();
 
-    UserDto getUserByIdService(Long userId);
+    UserDto getUserById(Long userId);
 
-    void updateUserService(UserDto userDto);
+    void updateUser(UserDto userDto);
 
-    void deleteUserService(Long userId);
+    void deleteUser(Long userId);
+
+    List<IUserBookingRoomDto> getBookingRoomByUserId(Long userId);
 }

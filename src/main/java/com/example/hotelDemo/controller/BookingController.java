@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,46 +23,39 @@ public class BookingController {
     private final ModelMapper modelMapper;
 
     // add booking
-    @PostMapping("/add/{id}")
-    @Operation(summary = "add booking", description = "Booking must exist")
-
-    public void addNewBooking(@PathVariable("id") Long roomId,
-                              @RequestBody @Validated BookingDto bookingDto) {
-        bookingService.addNewBookingService(roomId, bookingDto);
+    @PostMapping("/add")
+    public void addNewBooking(@RequestBody @Validated BookingDto bookingDto) {
+        bookingService.addNewBooking(bookingDto);
     }
 
     //update booking room
     @PutMapping("/update")
-    @Operation(summary = "update booking", description = "Booking must exist")
 
     public void updateBooking(@RequestBody @Validated BookingDto bookingDto) {
-        bookingService.updateBookingService(bookingDto);
+        bookingService.updateBooking(bookingDto);
     }
 
     //get all bookings
     @GetMapping("/get-all")
-    @Operation(summary = "get all bookings")
 
     public List<BookingDto> getAllBooking() {
-        return bookingService.getAllBookingsService().stream()
+        return bookingService.getAllBookings().stream()
                 .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
                         .toList());
     }
 
     //get a booking room
     @GetMapping("/get/{id}")
-    @Operation(summary = "get booking by Id", description = "Booking exist")
+    @Operation(description = "get booking by bookingId")
 
     public BookingDto getBookingById(@PathVariable(name = "id") Long bookingId) {
-        return bookingService.getBookingByIdService(bookingId);
+        return bookingService.getBookingById(bookingId);
     }
 
     //delete a booking
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "delete booking by Id")
-
     public void deleteBooking(@PathVariable(name = "id") Long bookingId) {
-        bookingService.deleteBookingService(bookingId);
+        bookingService.deleteBooking(bookingId);
     }
 
 }

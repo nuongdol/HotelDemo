@@ -24,20 +24,20 @@ public class RoomServiceImp implements RoomService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void addNewRoomService(RoomDto roomDto) {
+    public void addNewRoom(RoomDto roomDto) {
         Room room = new Room();
         BeanUtils.copyProperties(roomDto, room);
         roomRepository.save(room);
     }
 
     @Override
-    public List<RoomDto> getAllRoomsService() {
+    public List<RoomDto> getAllRooms() {
         return roomRepository.findAll().stream()
                 .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public RoomDto getRoomByIdService(Long roomId) {
+    public RoomDto getRoomById(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
         RoomDto roomDto = new RoomDto();
         room.ifPresent(value -> BeanUtils.copyProperties(value, roomDto));
@@ -45,12 +45,12 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public List<RoomDto> getRoomByStatusService(String status) {
-        return List.of();
+    public List<RoomHotelDto> getRoomByStatus(String status) {
+        return roomRepository.findHotelAndRoom(status);
     }
 
     @Override
-    public void updateRoomService(RoomDto roomDto) {
+    public void updateRoom(RoomDto roomDto) {
         Optional<Room> room = roomRepository.findById(roomDto.getRoomId());
         Room roomUpdate = new Room();
         if(room.isPresent()){
@@ -61,7 +61,7 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public void deleteRoomService(Long roomId) {
+    public void deleteRoom(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
         if(room.isPresent()){
             roomRepository.deleteById(roomId);
@@ -70,8 +70,4 @@ public class RoomServiceImp implements RoomService {
         }
     }
 
-    @Override
-    public RoomHotelDto getHotelRoomService(Long roomId) {
-        return null;
-    }
 }

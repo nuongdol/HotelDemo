@@ -1,6 +1,7 @@
 package com.example.hotelDemo.model.dto;
 import lombok.Data;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 public class RoomDto {
@@ -22,4 +23,6 @@ public class RoomDto {
     private String roomStatus;
 
     private String roomImage;
+
+
 }

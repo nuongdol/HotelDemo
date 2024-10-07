@@ -16,14 +16,14 @@ public class MappingRoomBooking {
     private Long id;
 
     @Column(name = "room_id")
-    private Long RoomId;
+    private Long roomId;
 
     @Column(name = "booking_id")
-    private Long BookingId;
+    private Long bookingId;
 
     public MappingRoomBooking(Long roomId, Long bookingId) {
-        RoomId = roomId;
-        BookingId = bookingId;
+        this.roomId = roomId;
+        this.bookingId = bookingId;
     }
 
 }

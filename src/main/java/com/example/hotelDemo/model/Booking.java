@@ -49,18 +49,8 @@ public class Booking {
     @Column(name = "status")
     private String bookingStatus;
 
-    private void SumNumberOfGuest() {
-        this.totalNumberOfGuest = this.numberOfChildren + this.numberOfAdults;
-    }
 
-    public void setNumberOfChildren(Integer numberOfChildren) {
-        this.numberOfChildren = numberOfChildren;
-        SumNumberOfGuest();
-    }
 
-    public void setNumberOfAdults(Integer numberOfAdults) {
-        this.numberOfAdults = numberOfAdults;
-        SumNumberOfGuest();
-    }
+
 
 }
