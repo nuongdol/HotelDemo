@@ -1,10 +1,13 @@
 package com.example.hotelDemo.model.dto;
 
 
+<<<<<<< HEAD
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+=======
+>>>>>>> 17fb990 (eight commit)
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -14,7 +17,10 @@ public interface IUserBookingRoomDto {
 
      String getUserName();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 17fb990 (eight commit)
      String getPassword();
 
      String getEmail();
@@ -58,4 +64,9 @@ public interface IUserBookingRoomDto {
      String getPaymentMethod();
 
      String getBookingStatus();
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 17fb990 (eight commit)
 }

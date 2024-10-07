@@ -1,5 +1,10 @@
 package com.example.hotelDemo.model.dto;
 
+<<<<<<< HEAD
+=======
+;
+import lombok.Data;
+>>>>>>> 17fb990 (eight commit)
 
 
 import lombok.Data;

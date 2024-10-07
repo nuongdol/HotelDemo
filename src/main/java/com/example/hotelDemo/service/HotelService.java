@@ -13,6 +13,7 @@ public interface HotelService {
 
     void updateHotel(HotelDto hotelDto);
 
+<<<<<<< HEAD
     List<HotelDto> getAllLstHotel();
 
     HotelDto getHotelById(Long hotelId);
@@ -22,4 +23,13 @@ public interface HotelService {
     List<IRoomBookingDto> getAllLstRoomWithBookingVoucherByHotelId(Long hotelId);
 
     void changeStatusHotelById(Long hotelId, String status);
+=======
+    List<HotelDto> getAllHotels();
+
+    HotelDto getHotelById(Long hotelId);
+
+    void deleteHotel(Long hotelId);
+
+    List<IRoomBookingDto> getDetailByHotelId(Long hotelId);
+>>>>>>> 17fb990 (eight commit)
 }

@@ -10,6 +10,7 @@ public interface RoomService {
 
     void addNewRoom(RoomDto roomDto);
 
+<<<<<<< HEAD
     List<RoomDto> getAllLstRoom(Long hotelId);
 
     RoomDto getRoomByRoomId(Long roomId);
@@ -19,5 +20,17 @@ public interface RoomService {
     void updateRoom(RoomDto roomDto);
 
     void deleteRoomByRoomId(Long roomId);
+=======
+    List<RoomDto> getAllRooms();
+
+    RoomDto getRoomById(Long roomId);
+
+    List<RoomHotelDto> getRoomByStatus(String status);
+
+    void updateRoom(RoomDto roomDto);
+
+    void deleteRoom(Long roomId);
+
+>>>>>>> 17fb990 (eight commit)
 
 }

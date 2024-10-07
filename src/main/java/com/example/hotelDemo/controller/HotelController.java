@@ -23,6 +23,11 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
+<<<<<<< HEAD
+=======
+    //add a hotel
+    @PostMapping("/add")
+>>>>>>> 17fb990 (eight commit)
 
     @PostMapping("/create")
     @Operation(description = "add a new hotel")
@@ -32,11 +37,16 @@ public class HotelController {
 
 
     @PutMapping("/update")
+<<<<<<< HEAD
     @Operation(description = "update a hotel")
+=======
+
+>>>>>>> 17fb990 (eight commit)
     public void updateHotel(@RequestBody @Validated HotelDto hotelDto) {
         hotelService.updateHotel(hotelDto);
     }
 
+<<<<<<< HEAD
     @GetMapping("/get-all-lst-hotel")
     @Operation(description = "get list all hotel")
     public List<HotelDto> getAllLstHotel() {
@@ -66,10 +76,41 @@ public class HotelController {
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
         return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);
     }
+=======
+    //get all hotel
+    @GetMapping("/get-all")
+
+    public List<HotelDto> getAllHotels() {
+        return hotelService.getAllHotels().
+                stream().map(hotel -> modelMapper.map(hotel, HotelDto.class))
+                .collect(Collectors.toList());
+    }
+
+    //get a hotel
+    @GetMapping("/get/{id}")
+
+    public HotelDto getHotelById(@PathVariable(name = "id") Long hotelId) {
+        return hotelService.getHotelById(hotelId);
+    }
+
+    // delete a hotel
+    @DeleteMapping("/delete/{id}")
+
+    public void deleteHotel(@PathVariable(name = "id") Long hotelId) {
+        hotelService.deleteHotel(hotelId);
+>>>>>>> 17fb990 (eight commit)
 
     @PutMapping("/{hotelId}")
     @Operation(description = "Change status of hotel by hotelId")
     public void changeStatusHotel(@PathVariable Long hotelId, @RequestBody String status) {
         hotelService.changeStatusHotelById(hotelId, status);
+    }
+
+    //get room and booking by hotelId
+    @GetMapping("/get-detail/{id}")
+    @Operation(description = "get alls room and booking by using hotelId")
+
+    public List<IRoomBookingDto> getDetail(@PathVariable("id") Long hotelId){
+        return hotelService.getDetailByHotelId(hotelId);
     }
 }

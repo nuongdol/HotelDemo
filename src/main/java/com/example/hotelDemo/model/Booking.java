@@ -49,4 +49,11 @@ public class Booking {
     @Column(name = "status")
     private String bookingStatus;
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 17fb990 (eight commit)
 }
