@@ -2,7 +2,6 @@ package com.example.HotelDemo.Controller;
 
 import com.example.HotelDemo.Exception.CheckoutBooking;
 import com.example.HotelDemo.Model.Booking;
-import com.example.HotelDemo.Model.DetailedBooking;
 import com.example.HotelDemo.Model.Dto.*;
 import com.example.HotelDemo.Service.BookingService;
 import lombok.RequiredArgsConstructor;

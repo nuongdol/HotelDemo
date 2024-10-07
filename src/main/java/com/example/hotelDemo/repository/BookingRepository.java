@@ -1,6 +1,5 @@
 package com.example.HotelDemo.Repository;
 import com.example.HotelDemo.Model.Booking;
-import com.example.HotelDemo.Model.Dto.DetailedBookingDto;
 import com.example.HotelDemo.Model.Dto.RoomBookingDto;
 import com.example.HotelDemo.Model.Dto.RoomUserBookingDto;
 import com.example.HotelDemo.Model.Dto.UserBookingDto;
