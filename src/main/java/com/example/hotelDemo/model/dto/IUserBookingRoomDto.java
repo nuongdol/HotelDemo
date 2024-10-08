@@ -53,6 +53,4 @@ public interface IUserBookingRoomDto {
      String getPaymentMethod();
 
      String getBookingStatus();
-
-
 }

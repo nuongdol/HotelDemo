@@ -11,7 +11,7 @@ import static com.example.hotelDemo.sql.QueryRewrite.*;
 
 @Repository
 public interface RoomRepository extends JpaRepository <Room, Long>{
-    @Query(value = QUERY_ROOM_BY_STATUS, nativeQuery = true)
-    List<RoomHotelDto> findHotelAndRoom(@Param("status") String status);
+    @Query(value = QUERY_ROOM_BY_STATUS_AND_HOTEL_ID, nativeQuery = true)
+    List<RoomHotelDto> findLstRoomByStatusAndHotelId(@Param("status") String status, @Param("hotelId") Long hotelId);
 
 }

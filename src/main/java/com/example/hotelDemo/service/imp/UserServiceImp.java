@@ -28,14 +28,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllLstUser() {
         return userRepository.findAll().stream()
                 .map(user -> modelMapper.map(user,UserDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserDto getUserById(Long userId) {
+    public UserDto getUserByUserId(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         UserDto userDto = new UserDto();
         user.ifPresent(value -> BeanUtils.copyProperties(value, userDto));
@@ -56,7 +56,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUserByUserId(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()){
             userRepository.deleteById(userId);
@@ -67,7 +67,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<IUserBookingRoomDto> getBookingRoomByUserId(Long userId) {
-        return userRepository.findBookingAndRoomByUserId(userId);
+    public List<IUserBookingRoomDto> getAllLstRoomWithBookingVoucherByUserId(Long userId) {
+        if (userRepository.existsById(userId)) {
+            return userRepository.findRoomWithBookingVoucherByUserId(userId);
+        }else {
+            throw new ResourceNotFoundException("User not found");
+        }
     }
 }

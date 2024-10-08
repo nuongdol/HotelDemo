@@ -1,16 +1,19 @@
 package com.example.hotelDemo.enumHotel;
 
+
 public enum EnumRoom {
-    EMPTY{
-        public String toString() {
-            return "empty";
-        }
-    },
-    FULL{
-        public String toString() {
-            return "full";
-        }
-    };
+    EMPTY("empty"),
+    FULL("full");
+    private final String status;
+
+    EnumRoom(String status) {
+        this.status = status;
+    }
+    @Override
+    public String toString() {
+        return status;
+    }
+
 
 
 

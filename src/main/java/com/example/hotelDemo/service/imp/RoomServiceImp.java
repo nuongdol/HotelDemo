@@ -31,13 +31,13 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public List<RoomDto> getAllRooms() {
+    public List<RoomDto> getAllLstRoom() {
         return roomRepository.findAll().stream()
                 .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public RoomDto getRoomById(Long roomId) {
+    public RoomDto getRoomByRoomId(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
         RoomDto roomDto = new RoomDto();
         room.ifPresent(value -> BeanUtils.copyProperties(value, roomDto));
@@ -45,8 +45,8 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public List<RoomHotelDto> getRoomByStatus(String status) {
-        return roomRepository.findHotelAndRoom(status);
+    public List<RoomHotelDto> getLstRoomByStatus(String status, Long hotelId) {
+        return roomRepository.findLstRoomByStatusAndHotelId(status, hotelId);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public void deleteRoom(Long roomId) {
+    public void deleteRoomByRoomId(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
         if(room.isPresent()){
             roomRepository.deleteById(roomId);

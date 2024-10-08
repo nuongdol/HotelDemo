@@ -22,49 +22,44 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-    //add a hotel
-    @PostMapping("/add")
 
+    @PostMapping("/create")
+    @Operation(description = "add a new hotel")
     public void addNewHotel(@RequestBody @Validated HotelDto hotelDto) {
         hotelService.addNewHotel(hotelDto);
     }
 
-    //update a hotel
-    @PutMapping("/update")
 
+    @PutMapping("/update")
+    @Operation(description = "update a hotel")
     public void updateHotel(@RequestBody @Validated HotelDto hotelDto) {
         hotelService.updateHotel(hotelDto);
     }
 
-    //get all hotel
-    @GetMapping("/get-all")
-
-    public List<HotelDto> getAllHotels() {
-        return hotelService.getAllHotels().
+    @GetMapping("/get-all-lst-hotel")
+    @Operation(description = "get list all hotel")
+    public List<HotelDto> getAllLstHotel() {
+        return hotelService.getAllLstHotel().
                 stream().map(hotel -> modelMapper.map(hotel, HotelDto.class))
                 .collect(Collectors.toList());
     }
 
-    //get a hotel
-    @GetMapping("/get/{id}")
-
-    public HotelDto getHotelById(@PathVariable(name = "id") Long hotelId) {
+    @GetMapping("/lst-hotel/{hotelId}")
+    @Operation(description = "get a hotel by hotelId")
+    public HotelDto getHotelById(@PathVariable Long hotelId) {
         return hotelService.getHotelById(hotelId);
     }
 
-    // delete a hotel
-    @DeleteMapping("/delete/{id}")
-
-    public void deleteHotel(@PathVariable(name = "id") Long hotelId) {
-        hotelService.deleteHotel(hotelId);
+    @DeleteMapping("/delete/{hotelId}")
+    @Operation(description = "delete a hotel by hotelId")
+    public void deleteHotelById(@PathVariable Long hotelId) {
+        hotelService.deleteHotelById(hotelId);
 
     }
 
-    //get room and booking by hotelId
-    @GetMapping("/get-detail/{id}")
-    @Operation(description = "get alls room and booking by using hotelId")
-
-    public List<IRoomBookingDto> getDetail(@PathVariable("id") Long hotelId){
-        return hotelService.getDetailByHotelId(hotelId);
+    @GetMapping("/get-lst-room/{hotelId}")
+    @Operation(description = "Get room list with booking voucher by hotelId")
+    public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
+        return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);
     }
 }

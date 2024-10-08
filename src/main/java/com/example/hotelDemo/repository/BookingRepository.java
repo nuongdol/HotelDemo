@@ -11,12 +11,4 @@ import static com.example.hotelDemo.sql.QueryRewrite.*;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-
-    @Query(value = QUERY_ROOM_BOOKING, nativeQuery = true)
-    RoomBookingDto findRoomAndBookingById(@Param("bookingId") Long bookingId);
-
-//    @Query(value = QUERY_CHECKIN_AND_CHECKOUT, nativeQuery = true)
-//    UserBookingDto findUserAndBookingById(@Param("bookingId") Long bookingId);
-
-
 }

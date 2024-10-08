@@ -10,13 +10,13 @@ public interface UserService {
 
     void addNewUser(UserDto userDto);
 
-    List<UserDto> getAllUsers();
+    List<UserDto> getAllLstUser();
 
-    UserDto getUserById(Long userId);
+    UserDto getUserByUserId(Long userId);
 
     void updateUser(UserDto userDto);
 
-    void deleteUser(Long userId);
+    void deleteUserByUserId(Long userId);
 
-    List<IUserBookingRoomDto> getBookingRoomByUserId(Long userId);
+    List<IUserBookingRoomDto> getAllLstRoomWithBookingVoucherByUserId(Long userId);
 }

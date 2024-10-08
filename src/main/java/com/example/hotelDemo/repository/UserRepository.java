@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import static com.example.hotelDemo.sql.QueryRewrite.QUERY_ROOM_BY_USERID;
+import static com.example.hotelDemo.sql.QueryRewrite.QUERY_ROOM_BY_USER_ID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    @Query(value = QUERY_ROOM_BY_USERID, nativeQuery = true)
-    List<IUserBookingRoomDto> findBookingAndRoomByUserId(@Param("userId") Long userId);
+    @Query(value = QUERY_ROOM_BY_USER_ID, nativeQuery = true)
+    List<IUserBookingRoomDto> findRoomWithBookingVoucherByUserId(@Param("userId") Long userId);
 
 }

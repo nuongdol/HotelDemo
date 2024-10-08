@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,18 +37,18 @@ public class HotelServiceImp implements HotelService {
     public void updateHotel(HotelDto hotelDto) {
         Optional<Hotel> hotel = hotelRepository.findById(hotelDto.getHotelId());
         Hotel hotelUpdate = new Hotel();
-        if(hotel.isPresent()){
+        if (hotel.isPresent()) {
             hotelUpdate = hotel.get();
             BeanUtils.copyProperties(hotelDto, hotelUpdate);
-        }else {
+        } else {
             throw new ResourceNotFoundException("Sorry, Hotel not found.");
         }
     }
 
     @Override
-    public List<HotelDto> getAllHotels() {
+    public List<HotelDto> getAllLstHotel() {
         return hotelRepository.findAll().stream()
-                .map(hotel -> modelMapper.map(hotel,HotelDto.class))
+                .map(hotel -> modelMapper.map(hotel, HotelDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -60,17 +61,20 @@ public class HotelServiceImp implements HotelService {
     }
 
     @Override
-    public void deleteHotel(Long hotelId) {
+    public void deleteHotelById(Long hotelId) {
         Optional<Hotel> hotel = hotelRepository.findById(hotelId);
-        if(hotel.isPresent()){
+        if (hotel.isPresent()) {
             hotelRepository.deleteById(hotelId);
-        }else{
+        } else {
             throw new ResourceNotFoundException("Sorry, Hotel not found.");
         }
     }
 
     @Override
-    public List<IRoomBookingDto> getDetailByHotelId(Long hotelId) {
-        return hotelRepository.findBookingAndRoomByHotelId(hotelId);
+    public List<IRoomBookingDto> getAllLstRoomWithBookingVoucherByHotelId(Long hotelId) {
+        if (hotelRepository.existsById(hotelId)) {
+            return hotelRepository.findRoomWithBookingVoucherByHotelId(hotelId);
+        }
+        return null;
     }
 }

@@ -1,17 +1,16 @@
 package com.example.hotelDemo.enumHotel;
 
 public enum EnumHotel {
-    ACTIVITY {
-        @Override
-        public String toString() {
-           return "Activity";
-        }
-    },
-    NON_ACTIVITY {
-        @Override
-        public String toString() {
-            return "Non Activity";
-        }
-    };
 
+    ACTIVITY("Activity"),
+    NON_ACTIVITY("Non Activity");
+    private final String status;
+
+    EnumHotel(String status){
+        this.status = status;
+    }
+    @Override
+    public String toString() {
+        return status;
+    }
 }

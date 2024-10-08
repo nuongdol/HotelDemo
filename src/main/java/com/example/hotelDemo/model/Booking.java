@@ -50,7 +50,4 @@ public class Booking {
     private String bookingStatus;
 
 
-
-
-
 }

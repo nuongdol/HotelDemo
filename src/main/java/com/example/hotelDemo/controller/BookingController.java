@@ -22,40 +22,38 @@ public class BookingController {
     @Autowired
     private final ModelMapper modelMapper;
 
-    // add booking
-    @PostMapping("/add")
+    @PostMapping("/create")
+    @Operation(description = "create new booking")
     public void addNewBooking(@RequestBody @Validated BookingDto bookingDto) {
         bookingService.addNewBooking(bookingDto);
     }
 
-    //update booking room
     @PutMapping("/update")
-
+    @Operation(description = "update booking room")
     public void updateBooking(@RequestBody @Validated BookingDto bookingDto) {
         bookingService.updateBooking(bookingDto);
     }
 
-    //get all bookings
-    @GetMapping("/get-all")
-
-    public List<BookingDto> getAllBooking() {
-        return bookingService.getAllBookings().stream()
+    @GetMapping("/get-all-lst-booking")
+    @Operation(description = "get all list booking in a hotel")
+    public List<BookingDto> getAllLstBooking() {
+        return bookingService.getAllLstBooking().stream()
                 .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
                         .toList());
     }
 
-    //get a booking room
-    @GetMapping("/get/{id}")
-    @Operation(description = "get booking by bookingId")
 
-    public BookingDto getBookingById(@PathVariable(name = "id") Long bookingId) {
+    @GetMapping("/lst-booking/{bookingId}")
+    @Operation(description = "get a booking by bookingId")
+    public BookingDto getBookingById(@PathVariable Long bookingId) {
         return bookingService.getBookingById(bookingId);
     }
 
-    //delete a booking
-    @DeleteMapping("/delete/{id}")
-    public void deleteBooking(@PathVariable(name = "id") Long bookingId) {
-        bookingService.deleteBooking(bookingId);
+
+    @DeleteMapping("/delete/{bookingId}")
+    @Operation(description = "delete a booking by bookingId")
+    public void deleteBookingById(@PathVariable Long bookingId) {
+        bookingService.deleteBookingById(bookingId);
     }
 
 }

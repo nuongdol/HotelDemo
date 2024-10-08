@@ -13,11 +13,11 @@ public interface HotelService {
 
     void updateHotel(HotelDto hotelDto);
 
-    List<HotelDto> getAllHotels();
+    List<HotelDto> getAllLstHotel();
 
     HotelDto getHotelById(Long hotelId);
 
-    void deleteHotel(Long hotelId);
+    void deleteHotelById(Long hotelId);
 
-    List<IRoomBookingDto> getDetailByHotelId(Long hotelId);
+    List<IRoomBookingDto> getAllLstRoomWithBookingVoucherByHotelId(Long hotelId);
 }

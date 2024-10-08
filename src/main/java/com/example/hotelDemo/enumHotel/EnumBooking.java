@@ -1,16 +1,16 @@
 package com.example.hotelDemo.enumHotel;
 
 public enum EnumBooking {
-    SUCCESSFUL{
-        public String toString() {
-            return "successful";
-        }
-    },
-    FAILED{
-        public String toString() {
-            return "failed";
-        }
-    };
 
+    SUCCESSFUL("successful"),
+    FAILED("failed");
+    private final String status;
 
+    EnumBooking(String status) {
+        this.status = status;
+    }
+    @Override
+    public String toString() {
+        return status;
+    }
 }

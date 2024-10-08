@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.example.hotelDemo.sql.QueryRewrite.QUERY_ROOM_BOOKING_BY_HOTELID;
+import static com.example.hotelDemo.sql.QueryRewrite.QUERY_ROOM_BOOKING_BY_HOTEL_ID;
 
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-    @Query(value = QUERY_ROOM_BOOKING_BY_HOTELID, nativeQuery = true)
-    List<IRoomBookingDto> findBookingAndRoomByHotelId(@Param("hotelId") Long hotelId);
+    @Query(value = QUERY_ROOM_BOOKING_BY_HOTEL_ID, nativeQuery = true)
+    List<IRoomBookingDto> findRoomWithBookingVoucherByHotelId(@Param("hotelId") Long hotelId);
 
 }
