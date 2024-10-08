@@ -70,5 +70,6 @@ public class QueryRewrite {
                     "or b.checkout_date < date(now()))" +
                     "and (b.checkin_date < date(now())" +
                     "and b.checkout_date < date(now()))";
-
+    public static final String QUERY_MAPPING_BOOKING_AND_ROOM_BY_BOOKING_ID =
+            "delete from mapping_room_booking mp where mp.booking_id=:bookingId";
 }

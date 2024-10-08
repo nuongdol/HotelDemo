@@ -10,7 +10,6 @@ import com.example.hotelDemo.model.dto.BookingDto;
 import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.repository.BookingRepository;
 import com.example.hotelDemo.repository.MappingRoomBookingRepository;
-import com.example.hotelDemo.repository.RoomRepository;
 import com.example.hotelDemo.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -92,10 +91,10 @@ public class BookingServiceImp implements BookingService {
 
     @Override
     public void deleteBookingById(Long bookingId) {
-
         Optional<Booking> booking = bookingRepository.findById(bookingId);
         if (booking.isPresent()) {
             bookingRepository.deleteById(bookingId);
+            mappingRoomBookingRepository.deleteMappingRoomBookingByBookingId(bookingId);
         } else {
             throw new ResourceNotFoundException("Booking not found");
         }
