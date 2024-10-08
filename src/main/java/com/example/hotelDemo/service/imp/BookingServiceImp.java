@@ -36,9 +36,6 @@ public class BookingServiceImp implements BookingService {
     private MappingRoomBookingRepository mappingRoomBookingRepository;
     @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private RoomRepository roomRepository;
-
 
     @Override
     public void addNewBooking(BookingDto bookingDto) {
@@ -95,6 +92,7 @@ public class BookingServiceImp implements BookingService {
 
     @Override
     public void deleteBookingById(Long bookingId) {
+
         Optional<Booking> booking = bookingRepository.findById(bookingId);
         if (booking.isPresent()) {
             bookingRepository.deleteById(bookingId);
