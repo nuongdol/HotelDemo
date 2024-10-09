@@ -5,6 +5,7 @@ import com.example.hotelDemo.model.dto.HotelDto;
 import com.example.hotelDemo.model.dto.IRoomBookingDto;
 import com.example.hotelDemo.service.HotelService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,11 @@ public class HotelController {
     @Operation(description = "Get room list with booking voucher by hotelId")
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
         return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);
+    }
+
+    @PutMapping("/{hotelId}")
+    @Operation(description = "Change status of hotel by hotelId")
+    public void changeStatusHotel(@PathVariable Long hotelId, @RequestBody String status) {
+        hotelService.changeStatusHotelById(hotelId, status);
     }
 }

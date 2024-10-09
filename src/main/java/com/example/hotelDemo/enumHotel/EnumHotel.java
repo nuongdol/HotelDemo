@@ -2,8 +2,8 @@ package com.example.hotelDemo.enumHotel;
 
 public enum EnumHotel {
 
-    ACTIVITY("Activity"),
-    NON_ACTIVITY("Non Activity");
+    ACTIVITY("existent"),
+    NON_ACTIVITY("non-existent");
     private final String status;
 
     EnumHotel(String status){

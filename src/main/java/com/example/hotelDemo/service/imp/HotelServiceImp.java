@@ -5,7 +5,6 @@ import com.example.hotelDemo.exception.ResourceNotFoundException;
 import com.example.hotelDemo.model.Hotel;
 import com.example.hotelDemo.model.dto.HotelDto;
 import com.example.hotelDemo.model.dto.IRoomBookingDto;
-import com.example.hotelDemo.model.dto.RoomBookingDto;
 import com.example.hotelDemo.repository.HotelRepository;
 import com.example.hotelDemo.service.HotelService;
 import jakarta.transaction.Transactional;
@@ -75,5 +74,12 @@ public class HotelServiceImp implements HotelService {
         }else{
             throw new ResourceNotFoundException("Room list with booking voucher not found");
         }
+    }
+
+    @Override
+    public void changeStatusHotelById(Long hotelId, String status) {
+        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(()-> new ResourceNotFoundException("Hotel not found"));
+        hotel.setHotelStatus(status);
+        hotelRepository.save(hotel);
     }
 }
