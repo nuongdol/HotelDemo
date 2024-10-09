@@ -18,4 +18,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     @Query(value = QUERY_ROOM_BOOKING_BY_HOTEL_ID, nativeQuery = true)
     List<IRoomBookingDto> findRoomWithBookingVoucherByHotelId(@Param("hotelId") Long hotelId);
 
+
 }

@@ -20,4 +20,6 @@ public interface HotelService {
     void deleteHotelById(Long hotelId);
 
     List<IRoomBookingDto> getAllLstRoomWithBookingVoucherByHotelId(Long hotelId);
+
+    void changeStatusHotelById(Long hotelId, String status);
 }

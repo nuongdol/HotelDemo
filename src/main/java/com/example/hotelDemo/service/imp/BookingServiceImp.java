@@ -2,13 +2,17 @@ package com.example.hotelDemo.service.imp;
 
 
 import com.example.hotelDemo.enumHotel.EnumBooking;
+import com.example.hotelDemo.enumHotel.EnumHotel;
 import com.example.hotelDemo.exception.InvalidBookingRequestException;
+import com.example.hotelDemo.exception.InvalidHotelRequestException;
 import com.example.hotelDemo.exception.ResourceNotFoundException;
 import com.example.hotelDemo.model.Booking;
+import com.example.hotelDemo.model.Hotel;
 import com.example.hotelDemo.model.MappingRoomBooking;
 import com.example.hotelDemo.model.dto.BookingDto;
 import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.repository.BookingRepository;
+import com.example.hotelDemo.repository.HotelRepository;
 import com.example.hotelDemo.repository.MappingRoomBookingRepository;
 import com.example.hotelDemo.service.BookingService;
 import jakarta.transaction.Transactional;
@@ -24,7 +28,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import static com.example.hotelDemo.enumHotel.EnumRoom.EMPTY;
 
 @Service
@@ -37,28 +40,36 @@ public class BookingServiceImp implements BookingService {
     private MappingRoomBookingRepository mappingRoomBookingRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private HotelRepository hotelRepository;
 
     @Transactional
     @Override
     public void addNewBooking(BookingDto bookingDto) {
-        Booking booking = new Booking();
-        List<RoomDto> rooms = bookingDto.getRooms();
-        List<Booking> bookings = new ArrayList<>();
-        List<MappingRoomBooking> mappingRoomBookings = new ArrayList<>();
-        for (RoomDto roomDto : rooms) {
-            SaveBooking(roomDto, bookingDto, booking, bookings);
+        Hotel hotel = hotelRepository.findById(bookingDto.getHotelId())
+                .orElseThrow(()->new ResourceNotFoundException("Hotel not found"));
+        if(Objects.equals(hotel.getHotelStatus(),EnumHotel.ACTIVITY.toString())) {
+            Booking booking = new Booking();
+            List<RoomDto> rooms = bookingDto.getRooms();
+            List<Booking> bookings = new ArrayList<>();
+            List<MappingRoomBooking> mappingRoomBookings = new ArrayList<>();
+            for (RoomDto roomDto : rooms) {
+                SaveBooking(roomDto, bookingDto, booking, bookings);
 
-        }
-        List<Booking> bookingSaveAll = bookingRepository.saveAll(bookings);
-        bookingSaveAll.stream().limit(1).forEach(bookingSave -> {
-            rooms.forEach(roomSave -> {
-                MappingRoomBooking mappingRoomBooking = new MappingRoomBooking();
-                mappingRoomBooking.setBookingId(bookingSave.getBookingId());
-                mappingRoomBooking.setRoomId(roomSave.getRoomId());
-                mappingRoomBookings.add(mappingRoomBooking);
+            }
+            List<Booking> bookingSaveAll = bookingRepository.saveAll(bookings);
+            bookingSaveAll.stream().limit(1).forEach(bookingSave -> {
+                rooms.forEach(roomSave -> {
+                    MappingRoomBooking mappingRoomBooking = new MappingRoomBooking();
+                    mappingRoomBooking.setBookingId(bookingSave.getBookingId());
+                    mappingRoomBooking.setRoomId(roomSave.getRoomId());
+                    mappingRoomBookings.add(mappingRoomBooking);
+                });
             });
-        });
-        mappingRoomBookingRepository.saveAll(mappingRoomBookings);
+            mappingRoomBookingRepository.saveAll(mappingRoomBookings);
+        }else {
+            throw new InvalidHotelRequestException("Hotel is not activity");
+        }
     }
 
     private void SaveBooking(RoomDto roomDto, BookingDto bookingDto, Booking booking,
