@@ -32,9 +32,7 @@ public class RoomController {
     @GetMapping("/get-lst-all-room/{hotelId}")
     @Operation(description = "add list all room")
     public List<RoomDto> getAllLstRoom(@PathVariable Long hotelId) {
-        return roomService.getAllLstRoom(hotelId).stream()
-                .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors
-                        .toList());
+        return roomService.getAllLstRoom(hotelId);
     }
 
     @GetMapping("/lst-room/{roomId}")
@@ -47,8 +45,6 @@ public class RoomController {
     @GetMapping("/get-lst-room")
     @Operation(description = "get room by status")
     public List<RoomHotelDto> getLstRoomByStatus(@RequestParam("status") String status, @RequestParam("hotelId") Long hotelId) {
-//        return roomService.getLstRoomByStatusAndHotelId(status,hotelId).stream().map(
-//                roomHotel -> modelMapper.map(roomHotel, RoomHotelDto.class)).collect(Collectors.toList());
         return roomService.getLstRoomByStatusAndHotelId(status,hotelId);
 
     }

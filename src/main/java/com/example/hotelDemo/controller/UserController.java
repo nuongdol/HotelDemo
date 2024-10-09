@@ -36,8 +36,6 @@ public class UserController {
     @GetMapping("/get-all-lst-user")
     @Operation(description = "get list user")
     public List<UserDto> getAllLstUser() {
-//        return userService.getAllLstUser().stream().map(user -> modelMapper.map(user, UserDto.class))
-//                .collect(Collectors.toList());
         return userService.getAllLstUser();
     }
 
