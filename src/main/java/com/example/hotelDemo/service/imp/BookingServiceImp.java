@@ -46,6 +46,7 @@ public class BookingServiceImp implements BookingService {
     @Transactional
     @Override
     public void addNewBooking(BookingDto bookingDto) {
+<<<<<<< HEAD
         Hotel hotel = hotelRepository.findById(bookingDto.getHotelId())
                 .orElseThrow(()->new ResourceNotFoundException("Hotel not found"));
         if(Objects.equals(hotel.getHotelStatus(),EnumHotel.ACTIVITY.toString())) {
@@ -69,7 +70,26 @@ public class BookingServiceImp implements BookingService {
             mappingRoomBookingRepository.saveAll(mappingRoomBookings);
         }else {
             throw new InvalidHotelRequestException("Hotel is not activity");
+=======
+        Booking booking = new Booking();
+        List<RoomDto> rooms = bookingDto.getRooms();
+        List<Booking> bookings = new ArrayList<>();
+        List<MappingRoomBooking> mappingRoomBookings = new ArrayList<>();
+        for (RoomDto roomDto : rooms) {
+            SaveBooking(roomDto, bookingDto, booking, bookings);
+
+>>>>>>> e32e7fb (twelve)
         }
+        List<Booking> bookingSaveAll = bookingRepository.saveAll(bookings);
+        bookingSaveAll.stream().limit(1).forEach(bookingSave -> {
+            rooms.forEach(roomSave -> {
+                MappingRoomBooking mappingRoomBooking = new MappingRoomBooking();
+                mappingRoomBooking.setBookingId(bookingSave.getBookingId());
+                mappingRoomBooking.setRoomId(roomSave.getRoomId());
+                mappingRoomBookings.add(mappingRoomBooking);
+            });
+        });
+        mappingRoomBookingRepository.saveAll(mappingRoomBookings);
     }
 
     private void SaveBooking(RoomDto roomDto, BookingDto bookingDto, Booking booking,

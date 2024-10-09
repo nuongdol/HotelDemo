@@ -40,6 +40,12 @@ public class HotelController {
     @GetMapping("/get-all-lst-hotel")
     @Operation(description = "get list all hotel")
     public List<HotelDto> getAllLstHotel() {
+<<<<<<< HEAD
+=======
+//        return hotelService.getAllLstHotel().
+//                stream().map(hotel -> modelMapper.map(hotel, HotelDto.class))
+//                .collect(Collectors.toList());
+>>>>>>> e32e7fb (twelve)
         return hotelService.getAllLstHotel();
     }
 

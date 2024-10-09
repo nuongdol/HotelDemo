@@ -36,6 +36,11 @@ public class UserController {
     @GetMapping("/get-all-lst-user")
     @Operation(description = "get list user")
     public List<UserDto> getAllLstUser() {
+<<<<<<< HEAD
+=======
+//        return userService.getAllLstUser().stream().map(user -> modelMapper.map(user, UserDto.class))
+//                .collect(Collectors.toList());
+>>>>>>> e32e7fb (twelve)
         return userService.getAllLstUser();
     }
 

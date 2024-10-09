@@ -36,6 +36,12 @@ public class BookingController {
     @GetMapping("/get-all-lst-booking")
     @Operation(description = "get list all booking in a hotel")
     public List<BookingDto> getAllLstBooking() {
+<<<<<<< HEAD
+=======
+//        return bookingService.getAllLstBooking().stream()
+//                .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
+//                        .toList());
+>>>>>>> e32e7fb (twelve)
         return bookingService.getAllLstBooking();
     }
 
