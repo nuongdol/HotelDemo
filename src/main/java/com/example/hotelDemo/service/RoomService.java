@@ -10,11 +10,11 @@ public interface RoomService {
 
     void addNewRoom(RoomDto roomDto);
 
-    List<RoomDto> getAllLstRoom();
+    List<RoomDto> getAllLstRoom(Long hotelId);
 
     RoomDto getRoomByRoomId(Long roomId);
 
-    List<RoomHotelDto> getLstRoomByStatus(String status, Long hotelId);
+    List<RoomHotelDto> getLstRoomByStatusAndHotelId(String status, Long hotelId);
 
     void updateRoom(RoomDto roomDto);
 

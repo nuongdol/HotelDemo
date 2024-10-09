@@ -36,7 +36,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserDto getUserByUserId(Long userId) {
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = Optional.of(userRepository.findById(userId).orElseThrow(()->
+                new ResourceNotFoundException("User with id " + userId + " not found")));
         UserDto userDto = new UserDto();
         user.ifPresent(value -> BeanUtils.copyProperties(value, userDto));
         return userDto;
@@ -44,26 +45,19 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void updateUser(UserDto userDto) {
-        Optional<User> user = userRepository.findById(userDto.getUserId());
-        User userUpdate = new User();
-        if(user.isPresent()){
-            userUpdate = user.get();
-            BeanUtils.copyProperties(userDto, userUpdate);
-        }else {
-            throw new ResourceNotFoundException("User not found");
-        }
+        Optional<User> user = Optional.of(userRepository.findById(userDto.getUserId()).orElseThrow(
+                () -> new ResourceNotFoundException("User with id " + userDto.getUserId() + " not found")
+        ));
+        User userUpdate = user.get();
+        BeanUtils.copyProperties(userDto, userUpdate);
         userRepository.save(userUpdate);
     }
 
     @Override
     public void deleteUserByUserId(Long userId) {
-        Optional<User> user = userRepository.findById(userId);
-        if(user.isPresent()){
-            userRepository.deleteById(userId);
-        }else {
-            throw new ResourceNotFoundException("User not found");
-        }
-
+        Optional<User> user = Optional.of(userRepository.findById(userId).orElseThrow(()->
+                new ResourceNotFoundException("User with id " + userId + " not found")));
+        userRepository.deleteById(user.get().getUserId());
     }
 
     @Override

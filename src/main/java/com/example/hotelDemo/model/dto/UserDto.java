@@ -1,6 +1,7 @@
 package com.example.hotelDemo.model.dto;
 
 
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data

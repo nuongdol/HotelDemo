@@ -8,13 +8,13 @@ public class QueryRewrite {
                     "r.type as roomType,\n" +
                     "r.capacity as roomCapacity,\n" +
                     "r.price as roomPrice,\n" +
-                    "r.status as roomDescription ,\n" +
-                    "r.image as roomStatus,\n" +
+                    "r.status as roomStatus ,\n" +
+                    "r.description as roomDescription ,\n" +
+                    "r.image as roomImage,\n" +
                     "h.name as hotelName\n" +
                     "from room r\n" +
-                    "join hotel h on r.id = h.id\n" +
-                    "where r.status=:status and r.hotel_id=:hotelId";
-
+                    "join hotel h on r.hotel_id = h.id\n" +
+                    "where r.status=:status and h.id=:hotelId";
 
     public static final String QUERY_ROOM_BY_USER_ID =
             "select u.name as userName,\n" +
@@ -29,9 +29,10 @@ public class QueryRewrite {
                     "b.payment_method as paymentMethod,\n" +
                     "r.name as roomName, \n" +
                     "r.price as roomPrice,\n" +
-                    "case\n" +
-                    "when r.status = 'empty' then 'empty'\n" +
-                    "else 'full'\n" +
+                    "case\n " +
+                    "when b.checkin_date > date(now()) or b.checkout_date < date(now())\n" +
+                    "and not (b.checkin_date < date(now()) and b.checkout_date < date(now())) then 'full'\n" +
+                    "else 'empty'\n" +
                     "end as roomStatus,\n" +
                     "r.type as roomType\n" +
                     "from booking b\n" +
@@ -56,7 +57,10 @@ public class QueryRewrite {
                     "b.children as numberOfChildren,\n" +
                     "b.total_guest as totalNumberOfGuest,\n" +
                     "b.payment_method as paymentMethod,\n" +
-                    "b.status as bookingStatus,\n" +
+                    "case\n" +
+                    "when b.checkin_date > date(now()) or b.checkout_date < date(now())\n" +
+                    "and not (b.checkin_date < date(now()) and b.checkout_date < date(now())) then 'successful'\n" +
+                    "else 'failed' end as bookingStatus,\n" +
                     "r.name as roomName,\n" +
                     "r.type as roomType,\n" +
                     "r.capacity as roomCapacity,\n" +
@@ -65,11 +69,9 @@ public class QueryRewrite {
                     "from hotel h\n" +
                     "join booking b on h.id = b.hotel_id\n" +
                     "join room r on h.id = r.hotel_id\n" +
-                    "where h.id=:hotelId\n " +
-                    "and (b.checkin_date > date(now())" +
-                    "or b.checkout_date < date(now()))" +
-                    "and (b.checkin_date < date(now())" +
-                    "and b.checkout_date < date(now()))";
+                    "where h.id=:hotelId";
+
+
     public static final String QUERY_MAPPING_BOOKING_AND_ROOM_BY_BOOKING_ID =
             "delete from mapping_room_booking mp where mp.booking_id=:bookingId";
 }

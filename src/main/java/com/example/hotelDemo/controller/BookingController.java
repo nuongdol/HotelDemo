@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,9 +36,10 @@ public class BookingController {
     @GetMapping("/get-all-lst-booking")
     @Operation(description = "get list all booking in a hotel")
     public List<BookingDto> getAllLstBooking() {
-        return bookingService.getAllLstBooking().stream()
-                .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
-                        .toList());
+//        return bookingService.getAllLstBooking().stream()
+//                .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
+//                        .toList());
+        return bookingService.getAllLstBooking();
     }
 
 

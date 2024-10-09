@@ -1,5 +1,6 @@
 package com.example.hotelDemo.model.dto;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

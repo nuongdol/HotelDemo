@@ -1,9 +1,9 @@
 package com.example.hotelDemo.controller;
 
 import com.example.hotelDemo.model.dto.RoomDto;
+import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,13 @@ public class RoomController {
     }
 
 
-    @GetMapping("/get-lst-all-room")
+    @GetMapping("/get-lst-all-room/{hotelId}")
     @Operation(description = "add list all room")
-    public List<RoomDto> getAllLstRoom() {
-        return roomService.getAllLstRoom().stream()
+    public List<RoomDto> getAllLstRoom(@PathVariable Long hotelId) {
+        return roomService.getAllLstRoom(hotelId).stream()
                 .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors
                         .toList());
     }
-
 
     @GetMapping("/lst-room/{roomId}")
     @Operation(description = "get a room by roomId")
@@ -47,9 +46,10 @@ public class RoomController {
 
     @GetMapping("/get-lst-room")
     @Operation(description = "get room by status")
-    public List<RoomDto> getLstRoomByStatus(@PathParam("status") String status, @PathParam("hotelId") Long hotelId) {
-        return roomService.getLstRoomByStatus(status,hotelId).stream().map(
-                room -> modelMapper.map(room, RoomDto.class)).collect(Collectors.toList());
+    public List<RoomHotelDto> getLstRoomByStatus(@RequestParam("status") String status, @RequestParam("hotelId") Long hotelId) {
+//        return roomService.getLstRoomByStatusAndHotelId(status,hotelId).stream().map(
+//                roomHotel -> modelMapper.map(roomHotel, RoomHotelDto.class)).collect(Collectors.toList());
+        return roomService.getLstRoomByStatusAndHotelId(status,hotelId);
 
     }
 

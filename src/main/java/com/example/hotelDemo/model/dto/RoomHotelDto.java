@@ -1,29 +1,30 @@
 package com.example.hotelDemo.model.dto;
 
-import lombok.Data;
+
 
 import java.math.BigDecimal;
 
 
 public interface RoomHotelDto {
 
-     String getHotelName();
+    String getHotelName();
 
-     String getHotelAddress();
+    String getHotelAddress();
 
-     String getHotelCity();
+    String getHotelCity();
 
-     String getHotelImage();
+    String getHotelImage();
 
-     Long getRoomId();
 
-     Long getHotelId();
+    Long getRoomId();
 
-     String getRoomName();
+    Long getHotelId();
 
-     String getRoomType();
+    String getRoomName();
 
-     String getRoomCapacity();
+    String getRoomType();
+
+    String getRoomCapacity();
 
     BigDecimal getRoomPrice();
 

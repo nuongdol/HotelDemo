@@ -49,5 +49,4 @@ public class Booking {
     @Column(name = "status")
     private String bookingStatus;
 
-
 }

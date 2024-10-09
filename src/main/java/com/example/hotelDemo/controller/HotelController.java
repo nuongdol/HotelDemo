@@ -39,9 +39,10 @@ public class HotelController {
     @GetMapping("/get-all-lst-hotel")
     @Operation(description = "get list all hotel")
     public List<HotelDto> getAllLstHotel() {
-        return hotelService.getAllLstHotel().
-                stream().map(hotel -> modelMapper.map(hotel, HotelDto.class))
-                .collect(Collectors.toList());
+//        return hotelService.getAllLstHotel().
+//                stream().map(hotel -> modelMapper.map(hotel, HotelDto.class))
+//                .collect(Collectors.toList());
+        return hotelService.getAllLstHotel();
     }
 
     @GetMapping("/lst-hotel/{hotelId}")
@@ -54,7 +55,6 @@ public class HotelController {
     @Operation(description = "delete a hotel by hotelId")
     public void deleteHotelById(@PathVariable Long hotelId) {
         hotelService.deleteHotelById(hotelId);
-
     }
 
     @GetMapping("/get-lst-room/{hotelId}")

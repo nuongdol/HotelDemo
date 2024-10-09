@@ -8,6 +8,7 @@ import com.example.hotelDemo.model.dto.IRoomBookingDto;
 import com.example.hotelDemo.model.dto.RoomBookingDto;
 import com.example.hotelDemo.repository.HotelRepository;
 import com.example.hotelDemo.service.HotelService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -26,6 +27,7 @@ public class HotelServiceImp implements HotelService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Transactional
     @Override
     public void addNewHotel(HotelDto hotelDto) {
         Hotel hotel = new Hotel();
@@ -34,15 +36,12 @@ public class HotelServiceImp implements HotelService {
     }
 
     @Override
+    @Transactional
     public void updateHotel(HotelDto hotelDto) {
-        Optional<Hotel> hotel = hotelRepository.findById(hotelDto.getHotelId());
-        Hotel hotelUpdate = new Hotel();
-        if (hotel.isPresent()) {
-            hotelUpdate = hotel.get();
-            BeanUtils.copyProperties(hotelDto, hotelUpdate);
-        } else {
-            throw new ResourceNotFoundException("Sorry, Hotel not found.");
-        }
+        Optional<Hotel> hotel = Optional.of(hotelRepository.findById(hotelDto.getHotelId()).orElseThrow(()->new ResourceNotFoundException("Hotel not found")));
+        Hotel hotelUpdate = hotel.get();
+        BeanUtils.copyProperties(hotelDto, hotelUpdate);
+
     }
 
     @Override
@@ -54,27 +53,27 @@ public class HotelServiceImp implements HotelService {
 
     @Override
     public HotelDto getHotelById(Long hotelId) {
-        Optional<Hotel> hotel = hotelRepository.findById(hotelId);
+        Optional<Hotel> hotel = Optional.of(hotelRepository.findById(hotelId)
+                .orElseThrow(()-> new ResourceNotFoundException("Hotel not found")));
         HotelDto hotelDto = new HotelDto();
         hotel.ifPresent(value -> BeanUtils.copyProperties(value, hotelDto));
         return hotelDto;
     }
 
     @Override
+    @Transactional
     public void deleteHotelById(Long hotelId) {
-        Optional<Hotel> hotel = hotelRepository.findById(hotelId);
-        if (hotel.isPresent()) {
-            hotelRepository.deleteById(hotelId);
-        } else {
-            throw new ResourceNotFoundException("Sorry, Hotel not found.");
-        }
+        Optional<Hotel> hotel = Optional.of(hotelRepository.findById(hotelId)
+                .orElseThrow(() -> new ResourceNotFoundException("Hotel not found")));
+        hotelRepository.deleteById(hotel.get().getHotelId());
     }
 
     @Override
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucherByHotelId(Long hotelId) {
         if (hotelRepository.existsById(hotelId)) {
             return hotelRepository.findRoomWithBookingVoucherByHotelId(hotelId);
+        }else{
+            throw new ResourceNotFoundException("Room list with booking voucher not found");
         }
-        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.hotelDemo.repository;
 
 import com.example.hotelDemo.model.Room;
+import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.model.dto.RoomHotelDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,7 @@ import static com.example.hotelDemo.sql.QueryRewrite.*;
 public interface RoomRepository extends JpaRepository <Room, Long>{
     @Query(value = QUERY_ROOM_BY_STATUS_AND_HOTEL_ID, nativeQuery = true)
     List<RoomHotelDto> findLstRoomByStatusAndHotelId(@Param("status") String status, @Param("hotelId") Long hotelId);
+
+    List<Room> findByHotelId(Long hotelId);
 
 }

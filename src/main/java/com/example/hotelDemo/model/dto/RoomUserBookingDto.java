@@ -1,13 +1,14 @@
 package com.example.hotelDemo.model.dto;
 
-;
-import lombok.Data;
 
+
+import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
 public class RoomUserBookingDto {
+
     private Long bookingId;
 
     private Long userId;

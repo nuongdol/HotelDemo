@@ -31,31 +31,31 @@ public class RoomServiceImp implements RoomService {
     }
 
     @Override
-    public List<RoomDto> getAllLstRoom() {
-        return roomRepository.findAll().stream()
+    public List<RoomDto> getAllLstRoom(Long hotelId) {
+        return roomRepository.findByHotelId(hotelId).stream()
                 .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public RoomDto getRoomByRoomId(Long roomId) {
-        Optional<Room> room = roomRepository.findById(roomId);
+        Optional<Room> room = Optional.of(roomRepository.findById(roomId)
+                .orElseThrow(() -> new IllegalStateException("Room not found")));
         RoomDto roomDto = new RoomDto();
         room.ifPresent(value -> BeanUtils.copyProperties(value, roomDto));
         return roomDto;
     }
 
     @Override
-    public List<RoomHotelDto> getLstRoomByStatus(String status, Long hotelId) {
+    public List<RoomHotelDto> getLstRoomByStatusAndHotelId(String status, Long hotelId) {
         return roomRepository.findLstRoomByStatusAndHotelId(status, hotelId);
     }
 
     @Override
     public void updateRoom(RoomDto roomDto) {
-        Optional<Room> room = roomRepository.findById(roomDto.getRoomId());
+        Optional<Room> room = Optional.of(roomRepository.findById(roomDto.getRoomId())
+                .orElseThrow(() -> new IllegalStateException("Room not found")));
         Room roomUpdate = new Room();
-        if(room.isPresent()){
-            roomUpdate = room.get();
-        }
+        roomUpdate = room.get();
         BeanUtils.copyProperties(roomDto, roomUpdate);
         roomRepository.save(roomUpdate);
     }
@@ -63,11 +63,10 @@ public class RoomServiceImp implements RoomService {
     @Override
     public void deleteRoomByRoomId(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
-        if(room.isPresent()){
+        if (room.isPresent()) {
             roomRepository.deleteById(roomId);
-        }else{
+        } else {
             throw new ResourceNotFoundException("Room not found");
         }
     }
-
 }

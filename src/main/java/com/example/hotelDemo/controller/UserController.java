@@ -2,6 +2,7 @@ package com.example.hotelDemo.controller;
 
 
 import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
+import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import com.example.hotelDemo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,9 +36,9 @@ public class UserController {
     @GetMapping("/get-all-lst-user")
     @Operation(description = "get list user")
     public List<UserDto> getAllLstUser() {
-        return userService.getAllLstUser().stream().map(user -> modelMapper.map(user, UserDto.class))
-                .collect(Collectors.toList());
-
+//        return userService.getAllLstUser().stream().map(user -> modelMapper.map(user, UserDto.class))
+//                .collect(Collectors.toList());
+        return userService.getAllLstUser();
     }
 
     @GetMapping("/lst-user/{userId}")
