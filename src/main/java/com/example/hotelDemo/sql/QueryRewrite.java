@@ -71,7 +71,6 @@ public class QueryRewrite {
                     "join room r on h.id = r.hotel_id\n" +
                     "where h.id=:hotelId";
 
-
     public static final String QUERY_MAPPING_BOOKING_AND_ROOM_BY_BOOKING_ID =
             "delete from mapping_room_booking mp where mp.booking_id=:bookingId";
 }
