@@ -41,8 +41,8 @@ public class QueryRewrite {
                     "join mapping_room_booking m on b.id = m.booking_id\n" +
                     "join room r on m.room_id = r.id\n" +
                     "where u.id=:userId\n" +
-                    "and (b.checkin_date > date(now())\n" +
-                    "or b.checkout_date < date(now()))" +
+                    "and b.checkin_date > date(now())\n" +
+                    "or b.checkout_date < date(now())" +
                     "and not (b.checkin_date < date(now())" +
                     "and b.checkout_date < date(now()))";
 
