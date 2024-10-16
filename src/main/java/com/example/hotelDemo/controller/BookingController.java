@@ -21,37 +21,24 @@ public class BookingController {
     @Autowired
     private final ModelMapper modelMapper;
 
-<<<<<<< HEAD
+
     @PostMapping("/create")
     @Operation(description = "create new booking")
-=======
     // add booking
     @PostMapping("/add")
->>>>>>> 17fb990 (eight commit)
     public void addNewBooking(@RequestBody @Validated BookingDto bookingDto) {
         bookingService.addNewBooking(bookingDto);
     }
 
     @PutMapping("/update")
-<<<<<<< HEAD
     @Operation(description = "update booking room")
-=======
-
->>>>>>> 17fb990 (eight commit)
     public void updateBooking(@RequestBody @Validated BookingDto bookingDto) {
         bookingService.updateBooking(bookingDto);
     }
 
-<<<<<<< HEAD
     @GetMapping("/get-all-lst-booking")
     @Operation(description = "get list all booking in a hotel")
     public List<BookingDto> getAllLstBooking() {
-<<<<<<< HEAD
-=======
-//        return bookingService.getAllLstBooking().stream()
-//                .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
-//                        .toList());
->>>>>>> e32e7fb (twelve)
         return bookingService.getAllLstBooking();
     }
 
@@ -67,7 +54,7 @@ public class BookingController {
     @Operation(description = "delete a booking by bookingId")
     public void deleteBookingById(@PathVariable Long bookingId) {
         bookingService.deleteBookingById(bookingId);
-=======
+
     //get all bookings
     @GetMapping("/get-all")
 
@@ -89,7 +76,5 @@ public class BookingController {
     @DeleteMapping("/delete/{id}")
     public void deleteBooking(@PathVariable(name = "id") Long bookingId) {
         bookingService.deleteBooking(bookingId);
->>>>>>> 17fb990 (eight commit)
     }
-
 }

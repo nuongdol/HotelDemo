@@ -5,7 +5,6 @@ import com.example.hotelDemo.model.dto.HotelDto;
 import com.example.hotelDemo.model.dto.IRoomBookingDto;
 import com.example.hotelDemo.service.HotelService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +22,9 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-<<<<<<< HEAD
-=======
     //add a hotel
     @PostMapping("/add")
->>>>>>> 17fb990 (eight commit)
+
 
     @PostMapping("/create")
     @Operation(description = "add a new hotel")
@@ -37,25 +34,15 @@ public class HotelController {
 
 
     @PutMapping("/update")
-<<<<<<< HEAD
     @Operation(description = "update a hotel")
-=======
-
->>>>>>> 17fb990 (eight commit)
     public void updateHotel(@RequestBody @Validated HotelDto hotelDto) {
         hotelService.updateHotel(hotelDto);
     }
 
-<<<<<<< HEAD
     @GetMapping("/get-all-lst-hotel")
     @Operation(description = "get list all hotel")
     public List<HotelDto> getAllLstHotel() {
-<<<<<<< HEAD
-=======
-//        return hotelService.getAllLstHotel().
-//                stream().map(hotel -> modelMapper.map(hotel, HotelDto.class))
-//                .collect(Collectors.toList());
->>>>>>> e32e7fb (twelve)
+
         return hotelService.getAllLstHotel();
     }
 
@@ -76,7 +63,7 @@ public class HotelController {
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
         return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);
     }
-=======
+
     //get all hotel
     @GetMapping("/get-all")
 
@@ -98,7 +85,7 @@ public class HotelController {
 
     public void deleteHotel(@PathVariable(name = "id") Long hotelId) {
         hotelService.deleteHotel(hotelId);
->>>>>>> 17fb990 (eight commit)
+
 
     @PutMapping("/{hotelId}")
     @Operation(description = "Change status of hotel by hotelId")
