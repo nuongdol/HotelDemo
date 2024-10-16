@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/booking")
 public class BookingController {
-
+    //can kafka thong bao
     @Autowired
     private final BookingService bookingService;
     @Autowired
