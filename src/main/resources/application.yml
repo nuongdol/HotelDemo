@@ -1,9 +1,6 @@
 #config .yml
-<<<<<<< HEAD
 # spring.application.name=hotelDemo
-=======
 # spring.application.name=HotelDemo
->>>>>>> fdd4c4c (first commit)
 server:
   port: 8080
 
@@ -17,10 +14,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-<<<<<<< HEAD
     database-platform: org.hibernate.dialect.MySQLDialect
-=======
->>>>>>> fdd4c4c (first commit)
   servlet:
     multipart:
       enabled: true
