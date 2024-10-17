@@ -16,10 +16,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/room")
 @RequiredArgsConstructor
 public class RoomController {
-    @Autowired
     private final RoomService roomService;
-    @Autowired
-    private final ModelMapper modelMapper;
 
 
     @PostMapping("/create")

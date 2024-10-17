@@ -17,11 +17,7 @@ import java.util.List;
 @RequestMapping("/hotel")
 @RequiredArgsConstructor
 public class HotelController {
-    @Autowired
-    private final ModelMapper modelMapper;
-    @Autowired
-    private HotelService hotelService;
-
+    private final HotelService hotelService;
 
     @PostMapping("/create")
     @Operation(description = "add a new hotel")
