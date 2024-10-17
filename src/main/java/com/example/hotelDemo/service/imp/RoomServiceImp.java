@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class RoomServiceImp implements RoomService {
 
     private final RoomRepository roomRepository;
+
     private final ModelMapper modelMapper;
 
     @Override

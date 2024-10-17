@@ -34,14 +34,13 @@ import static com.example.hotelDemo.enumHotel.EnumRoom.EMPTY;
 @RequiredArgsConstructor
 public class BookingServiceImp implements BookingService {
 
-    @Autowired
-    private BookingRepository bookingRepository;
-    @Autowired
-    private MappingRoomBookingRepository mappingRoomBookingRepository;
-    @Autowired
+    private final BookingRepository bookingRepository;
+
+    private final MappingRoomBookingRepository mappingRoomBookingRepository;
+
     private ModelMapper modelMapper;
-    @Autowired
-    private HotelRepository hotelRepository;
+
+    private final HotelRepository hotelRepository;
 
     @Transactional
     @Override
@@ -54,7 +53,7 @@ public class BookingServiceImp implements BookingService {
             List<Booking> bookings = new ArrayList<>();
             List<MappingRoomBooking> mappingRoomBookings = new ArrayList<>();
             for (RoomDto roomDto : rooms) {
-                SaveBooking(roomDto, bookingDto, booking, bookings);
+                saveBooking(roomDto, bookingDto, booking, bookings);
 
             }
             List<Booking> bookingSaveAll = bookingRepository.saveAll(bookings);
@@ -72,7 +71,7 @@ public class BookingServiceImp implements BookingService {
         }
     }
 
-    private void SaveBooking(RoomDto roomDto, BookingDto bookingDto, Booking booking,
+    private void saveBooking(RoomDto roomDto, BookingDto bookingDto, Booking booking,
                              List<Booking> bookings) {
         if (Objects.equals(roomDto.getRoomStatus(), EMPTY.toString())) {
             bookingDto.setTotalNumberOfGuest(bookingDto.NumberOfGuest(bookingDto.getNumberOfChildren(), bookingDto.getNumberOfAdults()));
