@@ -21,9 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class HotelServiceImp implements HotelService {
-    @Autowired
     private final HotelRepository hotelRepository;
-    @Autowired
+
     private ModelMapper modelMapper;
 
     @Transactional

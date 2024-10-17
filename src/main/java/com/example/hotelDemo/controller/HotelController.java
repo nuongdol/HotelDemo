@@ -14,14 +14,10 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/hotel")
+@RequestMapping("/hotels")
 @RequiredArgsConstructor
 public class HotelController {
-    @Autowired
-    private final ModelMapper modelMapper;
-    @Autowired
-    private HotelService hotelService;
-
+    private final HotelService hotelService;
 
     @PostMapping("/create")
     @Operation(description = "add a new hotel")
@@ -36,8 +32,8 @@ public class HotelController {
         hotelService.updateHotel(hotelDto);
     }
 
-    @GetMapping("/get-all-lst-hotel")
-    @Operation(description = "get list all hotel")
+    @GetMapping("/all-lst-hotels")
+    @Operation(description = "get list all hotels")
     public List<HotelDto> getAllLstHotel() {
         return hotelService.getAllLstHotel();
     }
@@ -48,13 +44,13 @@ public class HotelController {
         return hotelService.getHotelById(hotelId);
     }
 
-    @DeleteMapping("/delete/{hotelId}")
+    @DeleteMapping("/{hotelId}")
     @Operation(description = "delete a hotel by hotelId")
     public void deleteHotelById(@PathVariable Long hotelId) {
         hotelService.deleteHotelById(hotelId);
     }
 
-    @GetMapping("/get-lst-room/{hotelId}")
+    @GetMapping("/lst-room/{hotelId}")
     @Operation(description = "Get room list with booking voucher by hotelId")
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
         return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);

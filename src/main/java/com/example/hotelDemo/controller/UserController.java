@@ -16,14 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
     private final UserService userService;
 
 
@@ -33,8 +28,8 @@ public class UserController {
         userService.addNewUser(userDto);
     }
 
-    @GetMapping("/get-all-lst-user")
-    @Operation(description = "get list user")
+    @GetMapping("/all-lst-users")
+    @Operation(description = "get list users")
     public List<UserDto> getAllLstUser() {
         return userService.getAllLstUser();
     }
@@ -52,14 +47,14 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/{userId}")
     @Operation(description = "delete a user by userId")
     public void deleteUserById(@PathVariable Long userId) {
         userService.deleteUserByUserId(userId);
     }
 
 
-    @GetMapping("/get-lst-room/{userId}")
+    @GetMapping("/lst-rooms/{userId}")
     @Operation(description = "get room list and booking voucher by userId")
     public List<IUserBookingRoomDto> getAllLstRoomWithBookingVoucher(@PathVariable Long userId) {
         return userService.getAllLstRoomWithBookingVoucherByUserId(userId);
