@@ -15,11 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/booking")
 public class BookingController {
-
-    @Autowired
     private final BookingService bookingService;
-    @Autowired
-    private final ModelMapper modelMapper;
 
     @PostMapping("/create")
     @Operation(description = "create new booking")
