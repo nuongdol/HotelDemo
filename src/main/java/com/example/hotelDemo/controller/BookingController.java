@@ -15,8 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/booking")
 public class BookingController {
-    //can kafka thong bao
-    @Autowired
     private final BookingService bookingService;
     @Autowired
     private final ModelMapper modelMapper;
@@ -39,13 +37,11 @@ public class BookingController {
         return bookingService.getAllLstBooking();
     }
 
-
     @GetMapping("/lst-booking/{bookingId}")
     @Operation(description = "get a booking by bookingId")
     public BookingDto getBookingById(@PathVariable Long bookingId) {
         return bookingService.getBookingById(bookingId);
     }
-
 
     @DeleteMapping("/delete/{bookingId}")
     @Operation(description = "delete a booking by bookingId")
