@@ -73,4 +73,26 @@ public class QueryRewrite {
 
     public static final String QUERY_MAPPING_BOOKING_AND_ROOM_BY_BOOKING_ID =
             "delete from mapping_room_booking mp where mp.booking_id=:bookingId";
+
+    public static final String QUERY_ROOMS_BY_KEYWORD =
+            "select \n " +
+                    "r.id, \n" +
+                    "r.name as roomName, \n" +
+                    "r.type as roomType, \n" +
+                    "r.capacity as roomCapacity, \n" +
+                    "r.price as roomPrice, \n" +
+                    "r.description as roomDescription, \n" +
+                    "r.status as roomStatus, \n" +
+                    "r.image as roomImage \n" +
+                    "from room r \n" +
+                    "join hotel h \n" +
+                    "on r.hotel_id = h.id \n" +
+                    "where \n" +
+                    "(r.description like concat('%', :searchWord, '%') \n" +
+                    "or r.name like concat('%', :searchWord, '%') \n" +
+                    "or r.capacity like concat('%', :searchWord, '%')\n" +
+                    "or r.type like concat('%', :searchWord, '%') \n" +
+                    "or cast(r.price as char) like concat('%', :searchWord, '%')\n" +
+                    "or r.status like concat('%', :searchWord, '%'))\n" +
+                    "and h.name = :hotelName";
 }
