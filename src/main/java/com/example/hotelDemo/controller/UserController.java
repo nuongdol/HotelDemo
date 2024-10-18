@@ -24,17 +24,17 @@ public class UserController {
 
     @PostMapping("/create")
     @Operation(description = "add a new user")
-    public void addNewUser(@RequestBody @Validated UserDto userDto) {
+    public void addNewUser(@RequestBody UserDto userDto) {
         userService.addNewUser(userDto);
     }
 
-    @GetMapping("/all-lst-users")
+    @GetMapping("/all-lst")
     @Operation(description = "get list users")
     public List<UserDto> getAllLstUser() {
         return userService.getAllLstUser();
     }
 
-    @GetMapping("/lst-user/{userId}")
+    @GetMapping("/lst/{userId}")
     @Operation(description = "get a user by userId")
     public UserDto getUserById(@PathVariable Long userId) {
         return userService.getUserByUserId(userId);
@@ -42,7 +42,7 @@ public class UserController {
 
     @PutMapping("/update")
     @Operation(description = "update a user")
-    public void updateUser(@RequestBody @Validated UserDto userDto) {
+    public void updateUser(@RequestBody UserDto userDto) {
         userService.updateUser(userDto);
     }
 

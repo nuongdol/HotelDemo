@@ -32,13 +32,13 @@ public class HotelController {
         hotelService.updateHotel(hotelDto);
     }
 
-    @GetMapping("/all-lst-hotels")
+    @GetMapping("/all-lst")
     @Operation(description = "get list all hotels")
     public List<HotelDto> getAllLstHotel() {
         return hotelService.getAllLstHotel();
     }
 
-    @GetMapping("/lst-hotel/{hotelId}")
+    @GetMapping("/lst/{hotelId}")
     @Operation(description = "get a hotel by hotelId")
     public HotelDto getHotelById(@PathVariable Long hotelId) {
         return hotelService.getHotelById(hotelId);
@@ -50,7 +50,7 @@ public class HotelController {
         hotelService.deleteHotelById(hotelId);
     }
 
-    @GetMapping("/lst-room/{hotelId}")
+    @GetMapping("/lst/{hotelId}")
     @Operation(description = "Get room list with booking voucher by hotelId")
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
         return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);

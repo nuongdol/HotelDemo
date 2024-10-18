@@ -49,4 +49,7 @@ public class Booking {
     @Column(name = "status")
     private String bookingStatus;
 
+    @Column(name = "delete_flag")
+    private Integer deleteFlag;
+
 }

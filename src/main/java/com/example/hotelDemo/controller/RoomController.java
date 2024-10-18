@@ -5,12 +5,9 @@ import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rooms")
@@ -26,20 +23,20 @@ public class RoomController {
     }
 
 
-    @GetMapping("/lst-all-rooms/{hotelId}")
+    @GetMapping("/lst-all/{hotelId}")
     @Operation(description = "add list all room")
     public List<RoomDto> getAllLstRoom(@PathVariable Long hotelId) {
         return roomService.getAllLstRoom(hotelId);
     }
 
-    @GetMapping("/lst-room/{roomId}")
+    @GetMapping("/lst/{roomId}")
     @Operation(description = "get a room by roomId")
     public RoomDto getRoomById(@PathVariable Long roomId) {
         return roomService.getRoomByRoomId(roomId);
 
     }
 
-    @GetMapping("/lst-rooms")
+    @GetMapping("/lst")
     @Operation(description = "get rooms by status")
     public List<RoomHotelDto> getLstRoomByStatus(@RequestParam("status") String status, @RequestParam("hotelId") Long hotelId) {
         return roomService.getLstRoomByStatusAndHotelId(status,hotelId);
@@ -57,6 +54,15 @@ public class RoomController {
     @Operation(description = "delete a room by roomId")
     public void deleteRoomById(@PathVariable Long roomId) {
         roomService.deleteRoomByRoomId(roomId);
+    }
+
+    /*
+    tìm kiếm phòng theo từ khóa
+     */
+    @GetMapping("/search")
+    @Operation(description = "search rooms by keyWord")
+    public List<RoomHotelDto> searchRoomByKeyWord(@RequestParam String keyWord, @RequestParam String hotelName){
+        return roomService.searchRoomKeyWord(keyWord, hotelName);
     }
 
 }

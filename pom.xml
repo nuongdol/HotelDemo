@@ -64,15 +64,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
@@ -87,40 +83,7 @@
 				<artifactId>spring-boot-starter-validation</artifactId>
 				<version>2.4.5</version>
 			</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-			<version>9.22.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-mysql</artifactId>
-			<version>8.5.13</version>
-		</dependency>
->>>>>>> feature_nuong
-
-=======
->>>>>>> fdd4c4c (first commit)
 	</dependencies>
-=======
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.7.0</version>
-		</dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-validation</artifactId>
-				<version>2.4.5</version>
-			</dependency>
-
-    </dependencies>
->>>>>>> e32e7fb (twelve)
-
 	<build>
 		<plugins>
 			<plugin>
@@ -133,16 +96,6 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>9.22.0</version>
-				<configuration>
-					<url>jdbc:mysql://localhost:3306/hoteldb</url>
-					<user>root</user>
-					<password>123456n</password>
 				</configuration>
 			</plugin>
 		</plugins>

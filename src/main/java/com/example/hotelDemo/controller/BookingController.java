@@ -5,8 +5,6 @@ import com.example.hotelDemo.model.dto.*;
 import com.example.hotelDemo.service.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -29,14 +27,14 @@ public class BookingController {
         bookingService.updateBooking(bookingDto);
     }
 
-    @GetMapping("/all-lst-bookings")
+    @GetMapping("/all-lst")
     @Operation(description = "get list all bookings in a hotel")
     public List<BookingDto> getAllLstBooking() {
         return bookingService.getAllLstBooking();
     }
 
 
-    @GetMapping("/lst-booking/{bookingId}")
+    @GetMapping("/lst/{bookingId}")
     @Operation(description = "get a booking by bookingId")
     public BookingDto getBookingById(@PathVariable Long bookingId) {
         return bookingService.getBookingById(bookingId);
@@ -48,5 +46,7 @@ public class BookingController {
     public void deleteBookingById(@PathVariable Long bookingId) {
         bookingService.deleteBookingById(bookingId);
     }
+
+
 
 }
