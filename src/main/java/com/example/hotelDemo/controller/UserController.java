@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/create")
     @Operation(description = "add a new user")
-    public void addNewUser(@RequestBody @Validated UserDto userDto) {
+    public void addNewUser(@RequestBody UserDto userDto) {
         userService.addNewUser(userDto);
     }
 
@@ -42,7 +42,7 @@ public class UserController {
 
     @PutMapping("/update")
     @Operation(description = "update a user")
-    public void updateUser(@RequestBody @Validated UserDto userDto) {
+    public void updateUser(@RequestBody UserDto userDto) {
         userService.updateUser(userDto);
     }
 

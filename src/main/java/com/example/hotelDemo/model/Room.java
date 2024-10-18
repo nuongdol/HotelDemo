@@ -3,8 +3,10 @@ package com.example.hotelDemo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 @Entity
@@ -44,15 +46,14 @@ public class Room {
     @Column(name = "image")
     private String roomImage;
 
-    public Room(Long hotelId, String roomName, String roomType, String roomCapacity,
-                BigDecimal roomPrice, String roomDescription, String roomStatus, String roomImage) {
-        this.hotelId = hotelId;
-        this.roomName = roomName;
-        this.roomType = roomType;
-        this.roomCapacity = roomCapacity;
-        this.roomPrice = roomPrice;
-        this.roomDescription = roomDescription;
-        this.roomStatus = roomStatus;
-        this.roomImage = roomImage;
-    }
+    @Column(name = "created_at")
+    @CreatedDate
+    protected Date createAt;
+
+    @Column(name = "delete_flag")
+    private Integer deleteFlag;
+
+
+
+
 }

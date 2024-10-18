@@ -3,6 +3,9 @@ package com.example.hotelDemo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.util.Date;
 
 
 @Entity
@@ -32,5 +35,12 @@ public class Hotel {
 
     @Column(name = "status")
     String hotelStatus;
+
+    @Column(name= "create_at")
+    @CreatedDate
+    protected Date createAt;
+
+    @Column(name = "delete_flag")
+    private String deleteFlag;
 
 }

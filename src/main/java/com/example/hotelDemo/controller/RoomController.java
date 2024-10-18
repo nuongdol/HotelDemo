@@ -1,5 +1,6 @@
 package com.example.hotelDemo.controller;
 
+import com.example.hotelDemo.model.Room;
 import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.service.RoomService;
@@ -57,6 +58,18 @@ public class RoomController {
     @Operation(description = "delete a room by roomId")
     public void deleteRoomById(@PathVariable Long roomId) {
         roomService.deleteRoomByRoomId(roomId);
+    }
+
+    /* cac cach tim kiem phong
+    * */
+
+    /*
+    tìm kiếm phòng theo từ khóa
+     */
+    @GetMapping("/search")
+    @Operation(description = "search rooms by keyWord")
+    public List<RoomHotelDto> searchRoomByKeyWord(@RequestParam String keyWord, @RequestParam String hotelName){
+        return roomService.searchRoomKeyWord(keyWord, hotelName);
     }
 
 }
