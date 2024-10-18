@@ -29,14 +29,14 @@ public class BookingController {
         bookingService.updateBooking(bookingDto);
     }
 
-    @GetMapping("/all-lst-bookings")
+    @GetMapping("/all-lst")
     @Operation(description = "get list all bookings in a hotel")
     public List<BookingDto> getAllLstBooking() {
         return bookingService.getAllLstBooking();
     }
 
 
-    @GetMapping("/lst-booking/{bookingId}")
+    @GetMapping("/lst/{bookingId}")
     @Operation(description = "get a booking by bookingId")
     public BookingDto getBookingById(@PathVariable Long bookingId) {
         return bookingService.getBookingById(bookingId);

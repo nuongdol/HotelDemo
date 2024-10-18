@@ -21,24 +21,24 @@ public class HotelController {
 
     @PostMapping("/create")
     @Operation(description = "add a new hotel")
-    public void addNewHotel(@RequestBody @Validated HotelDto hotelDto) {
+    public void addNewHotel(@RequestBody HotelDto hotelDto) {
         hotelService.addNewHotel(hotelDto);
     }
 
 
     @PutMapping("/update")
     @Operation(description = "update a hotel")
-    public void updateHotel(@RequestBody @Validated HotelDto hotelDto) {
+    public void updateHotel(@RequestBody HotelDto hotelDto) {
         hotelService.updateHotel(hotelDto);
     }
 
-    @GetMapping("/all-lst-hotels")
+    @GetMapping("/all-lst")
     @Operation(description = "get list all hotels")
     public List<HotelDto> getAllLstHotel() {
         return hotelService.getAllLstHotel();
     }
 
-    @GetMapping("/lst-hotel/{hotelId}")
+    @GetMapping("/lst/{hotelId}")
     @Operation(description = "get a hotel by hotelId")
     public HotelDto getHotelById(@PathVariable Long hotelId) {
         return hotelService.getHotelById(hotelId);
