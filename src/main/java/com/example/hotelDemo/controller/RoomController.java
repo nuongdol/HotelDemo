@@ -21,7 +21,7 @@ public class RoomController {
 
     @PostMapping("/create")
     @Operation(description = "add a new room")
-    public void addNewRoom(@RequestBody @Validated RoomDto roomDto) {
+    public void addNewRoom(@RequestBody RoomDto roomDto) {
         roomService.addNewRoom(roomDto);
     }
 
@@ -41,14 +41,14 @@ public class RoomController {
 
     @GetMapping("/lst-rooms")
     @Operation(description = "get rooms by status")
-    public List<RoomHotelDto> getLstRoomByStatus(@RequestParam("status") String status, @RequestParam("hotelId") Long hotelId) {
+    public List<RoomHotelDto> getLstRoomByStatus(@RequestParam(value = "status") String status, @RequestParam(defaultValue = "hotelId") Long hotelId) {
         return roomService.getLstRoomByStatusAndHotelId(status,hotelId);
 
     }
 
     @PutMapping("/update")
     @Operation(description = "update room")
-    public void updateRoom(@RequestBody @Validated RoomDto roomDto) {
+    public void updateRoom(@RequestBody RoomDto roomDto) {
         roomService.updateRoom(roomDto);
     }
 

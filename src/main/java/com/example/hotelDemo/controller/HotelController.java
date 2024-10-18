@@ -21,14 +21,14 @@ public class HotelController {
 
     @PostMapping("/create")
     @Operation(description = "add a new hotel")
-    public void addNewHotel(@RequestBody @Validated HotelDto hotelDto) {
+    public void addNewHotel(@RequestBody HotelDto hotelDto) {
         hotelService.addNewHotel(hotelDto);
     }
 
 
     @PutMapping("/update")
     @Operation(description = "update a hotel")
-    public void updateHotel(@RequestBody @Validated HotelDto hotelDto) {
+    public void updateHotel(@RequestBody HotelDto hotelDto) {
         hotelService.updateHotel(hotelDto);
     }
 
