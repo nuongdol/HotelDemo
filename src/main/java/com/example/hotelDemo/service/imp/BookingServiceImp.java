@@ -109,6 +109,19 @@ public class BookingServiceImp implements BookingService {
         Optional<Booking> booking = Optional.of(bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException("Booking not found.")));
         BookingDto bookingDto = new BookingDto();
         booking.ifPresent(value -> BeanUtils.copyProperties(value, bookingDto, "bookingId"));
+
+        //Builder pattern test constructor
+        Booking bookingTestBuilder = Booking.builder()
+                .bookingStatus(booking.get().getBookingStatus())
+                .bookingId(bookingId)
+                .numberOfChildren(booking.get().getNumberOfChildren())
+                .numberOfAdults(booking.get().getNumberOfAdults())
+                .checkinDate(booking.get().getCheckinDate())
+                .checkoutDate(booking.get().getCheckoutDate())
+                .hotelId(booking.get().getHotelId())
+                .paymentMethod(booking.get().getPaymentMethod())
+                .build();
+
         return bookingDto;
     }
 

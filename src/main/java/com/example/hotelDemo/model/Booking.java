@@ -13,6 +13,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "booking")
+@Builder
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
