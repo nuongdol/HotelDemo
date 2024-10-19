@@ -1,17 +1,15 @@
 package com.example.hotelDemo.controller;
 
-import com.example.hotelDemo.model.Room;
+
 import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/rooms")
@@ -60,8 +58,6 @@ public class RoomController {
         roomService.deleteRoomByRoomId(roomId);
     }
 
-    /* cac cach tim kiem phong
-    * */
 
     /*
     tìm kiếm phòng theo từ khóa
