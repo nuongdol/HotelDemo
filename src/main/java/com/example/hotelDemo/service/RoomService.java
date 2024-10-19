@@ -5,6 +5,7 @@ import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.model.dto.RoomHotelDto;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -23,4 +24,6 @@ public interface RoomService {
     void deleteRoomByRoomId(Long roomId);
 
     List<RoomHotelDto> searchRoomKeyWord( String keyWord, String hotelName);
+
+    List<RoomHotelDto> searchRoomByAddressAndDate(String address, LocalDate checkinDate, LocalDate checkoutDate);
 }

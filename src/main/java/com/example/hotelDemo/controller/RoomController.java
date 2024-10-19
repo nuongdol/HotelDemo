@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -57,12 +59,24 @@ public class RoomController {
     }
 
     /*
-    tìm kiếm phòng theo từ khóa
+    tìm kiếm phòng theo từ khóa và có sẵn tên khách sạn
      */
+
     @GetMapping("/search")
     @Operation(description = "search rooms by keyWord")
     public List<RoomHotelDto> searchRoomByKeyWord(@RequestParam String keyWord, @RequestParam String hotelName){
         return roomService.searchRoomKeyWord(keyWord, hotelName);
     }
+
+    /*
+    Tìm kiếm phòng theo địa điểm và ngày checkin, checkout, số người lớn và trẻ em
+    */
+    @GetMapping("/addresses/search")
+    @Operation(description = "search rooms by address and checkin and checkout and number of adults and children")
+    public List<RoomHotelDto> searchRoomByAddressAndDate(@RequestParam String address, @RequestParam LocalDate checkinDate,
+                                                                  @RequestParam LocalDate checkoutDate){
+        return roomService.searchRoomByAddressAndDate(address, checkinDate, checkoutDate);
+    }
+
 
 }

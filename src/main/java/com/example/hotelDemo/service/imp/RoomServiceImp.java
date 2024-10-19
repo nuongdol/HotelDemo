@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,5 +76,10 @@ public class RoomServiceImp implements RoomService {
     @Override
     public List<RoomHotelDto> searchRoomKeyWord(String keyWord, String hotelName) {
         return roomRepository.findRoomsByKeyWord(keyWord, hotelName);
+    }
+
+    @Override
+    public List<RoomHotelDto> searchRoomByAddressAndDate(String address, LocalDate checkinDate, LocalDate checkoutDate) {
+        return roomRepository.findRoomsByAddressAndData(address, checkinDate, checkoutDate);
     }
 }
