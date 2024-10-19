@@ -17,4 +17,6 @@ public interface RoomRepository extends JpaRepository <Room, Long>{
 
     List<Room> findByHotelId(Long hotelId);
 
+    @Query(value = QUERY_ROOMS_BY_KEYWORD, nativeQuery = true)
+    List<RoomHotelDto> findRoomsByKeyWord(@Param(value = "searchWord") String keyWord, @Param("hotelName") String hotelName);
 }

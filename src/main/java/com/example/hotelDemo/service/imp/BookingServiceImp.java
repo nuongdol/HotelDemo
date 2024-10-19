@@ -34,19 +34,17 @@ import static com.example.hotelDemo.enumHotel.EnumRoom.EMPTY;
 @RequiredArgsConstructor
 public class BookingServiceImp implements BookingService {
 
-    @Autowired
-    private BookingRepository bookingRepository;
-    @Autowired
-    private MappingRoomBookingRepository mappingRoomBookingRepository;
-    @Autowired
+    private final BookingRepository bookingRepository;
+
+    private final MappingRoomBookingRepository mappingRoomBookingRepository;
+
     private ModelMapper modelMapper;
-    @Autowired
-    private HotelRepository hotelRepository;
+
+    private final HotelRepository hotelRepository;
 
     @Transactional
     @Override
     public void addNewBooking(BookingDto bookingDto) {
-<<<<<<< HEAD
         Hotel hotel = hotelRepository.findById(bookingDto.getHotelId())
                 .orElseThrow(()->new ResourceNotFoundException("Hotel not found"));
         if(Objects.equals(hotel.getHotelStatus(),EnumHotel.ACTIVITY.toString())) {
@@ -55,7 +53,7 @@ public class BookingServiceImp implements BookingService {
             List<Booking> bookings = new ArrayList<>();
             List<MappingRoomBooking> mappingRoomBookings = new ArrayList<>();
             for (RoomDto roomDto : rooms) {
-                SaveBooking(roomDto, bookingDto, booking, bookings);
+                saveBooking(roomDto, bookingDto, booking, bookings);
 
             }
             List<Booking> bookingSaveAll = bookingRepository.saveAll(bookings);
@@ -70,29 +68,10 @@ public class BookingServiceImp implements BookingService {
             mappingRoomBookingRepository.saveAll(mappingRoomBookings);
         }else {
             throw new InvalidHotelRequestException("Hotel is not activity");
-=======
-        Booking booking = new Booking();
-        List<RoomDto> rooms = bookingDto.getRooms();
-        List<Booking> bookings = new ArrayList<>();
-        List<MappingRoomBooking> mappingRoomBookings = new ArrayList<>();
-        for (RoomDto roomDto : rooms) {
-            SaveBooking(roomDto, bookingDto, booking, bookings);
-
->>>>>>> e32e7fb (twelve)
         }
-        List<Booking> bookingSaveAll = bookingRepository.saveAll(bookings);
-        bookingSaveAll.stream().limit(1).forEach(bookingSave -> {
-            rooms.forEach(roomSave -> {
-                MappingRoomBooking mappingRoomBooking = new MappingRoomBooking();
-                mappingRoomBooking.setBookingId(bookingSave.getBookingId());
-                mappingRoomBooking.setRoomId(roomSave.getRoomId());
-                mappingRoomBookings.add(mappingRoomBooking);
-            });
-        });
-        mappingRoomBookingRepository.saveAll(mappingRoomBookings);
     }
 
-    private void SaveBooking(RoomDto roomDto, BookingDto bookingDto, Booking booking,
+    private void saveBooking(RoomDto roomDto, BookingDto bookingDto, Booking booking,
                              List<Booking> bookings) {
         if (Objects.equals(roomDto.getRoomStatus(), EMPTY.toString())) {
             bookingDto.setTotalNumberOfGuest(bookingDto.NumberOfGuest(bookingDto.getNumberOfChildren(), bookingDto.getNumberOfAdults()));
@@ -130,6 +109,19 @@ public class BookingServiceImp implements BookingService {
         Optional<Booking> booking = Optional.of(bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException("Booking not found.")));
         BookingDto bookingDto = new BookingDto();
         booking.ifPresent(value -> BeanUtils.copyProperties(value, bookingDto, "bookingId"));
+
+        //Builder pattern test constructor
+        Booking bookingTestBuilder = Booking.builder()
+                .bookingStatus(booking.get().getBookingStatus())
+                .bookingId(bookingId)
+                .numberOfChildren(booking.get().getNumberOfChildren())
+                .numberOfAdults(booking.get().getNumberOfAdults())
+                .checkinDate(booking.get().getCheckinDate())
+                .checkoutDate(booking.get().getCheckoutDate())
+                .hotelId(booking.get().getHotelId())
+                .paymentMethod(booking.get().getPaymentMethod())
+                .build();
+
         return bookingDto;
     }
 

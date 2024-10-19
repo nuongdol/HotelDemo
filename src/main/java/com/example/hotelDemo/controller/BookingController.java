@@ -13,13 +13,9 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/booking")
+@RequestMapping("/bookings")
 public class BookingController {
-
-    @Autowired
     private final BookingService bookingService;
-    @Autowired
-    private final ModelMapper modelMapper;
 
     @PostMapping("/create")
     @Operation(description = "create new booking")
@@ -33,15 +29,9 @@ public class BookingController {
         bookingService.updateBooking(bookingDto);
     }
 
-    @GetMapping("/get-all-lst-booking")
-    @Operation(description = "get list all booking in a hotel")
+    @GetMapping("/all-lst-bookings")
+    @Operation(description = "get list all bookings in a hotel")
     public List<BookingDto> getAllLstBooking() {
-<<<<<<< HEAD
-=======
-//        return bookingService.getAllLstBooking().stream()
-//                .map(room -> modelMapper.map(room, BookingDto.class)).collect(Collectors
-//                        .toList());
->>>>>>> e32e7fb (twelve)
         return bookingService.getAllLstBooking();
     }
 
@@ -53,10 +43,12 @@ public class BookingController {
     }
 
 
-    @DeleteMapping("/delete/{bookingId}")
+    @DeleteMapping("/{bookingId}")
     @Operation(description = "delete a booking by bookingId")
     public void deleteBookingById(@PathVariable Long bookingId) {
         bookingService.deleteBookingById(bookingId);
     }
+
+
 
 }

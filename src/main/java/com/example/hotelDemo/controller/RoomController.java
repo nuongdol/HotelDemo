@@ -1,5 +1,6 @@
 package com.example.hotelDemo.controller;
 
+import com.example.hotelDemo.model.Room;
 import com.example.hotelDemo.model.dto.RoomDto;
 import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.service.RoomService;
@@ -13,13 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/room")
+@RequestMapping("/rooms")
 @RequiredArgsConstructor
 public class RoomController {
-    @Autowired
     private final RoomService roomService;
-    @Autowired
-    private final ModelMapper modelMapper;
 
 
     @PostMapping("/create")
@@ -29,16 +27,10 @@ public class RoomController {
     }
 
 
-    @GetMapping("/get-lst-all-room/{hotelId}")
+    @GetMapping("/lst-all-rooms/{hotelId}")
     @Operation(description = "add list all room")
     public List<RoomDto> getAllLstRoom(@PathVariable Long hotelId) {
-<<<<<<< HEAD
         return roomService.getAllLstRoom(hotelId);
-=======
-        return roomService.getAllLstRoom(hotelId).stream()
-                .map(room -> modelMapper.map(room, RoomDto.class)).collect(Collectors
-                        .toList());
->>>>>>> e32e7fb (twelve)
     }
 
     @GetMapping("/lst-room/{roomId}")
@@ -48,14 +40,9 @@ public class RoomController {
 
     }
 
-    @GetMapping("/get-lst-room")
-    @Operation(description = "get room by status")
+    @GetMapping("/lst-rooms")
+    @Operation(description = "get rooms by status")
     public List<RoomHotelDto> getLstRoomByStatus(@RequestParam("status") String status, @RequestParam("hotelId") Long hotelId) {
-<<<<<<< HEAD
-=======
-//        return roomService.getLstRoomByStatusAndHotelId(status,hotelId).stream().map(
-//                roomHotel -> modelMapper.map(roomHotel, RoomHotelDto.class)).collect(Collectors.toList());
->>>>>>> e32e7fb (twelve)
         return roomService.getLstRoomByStatusAndHotelId(status,hotelId);
 
     }
@@ -67,10 +54,22 @@ public class RoomController {
     }
 
 
-    @DeleteMapping("/delete/{roomId}")
+    @DeleteMapping("/{roomId}")
     @Operation(description = "delete a room by roomId")
     public void deleteRoomById(@PathVariable Long roomId) {
         roomService.deleteRoomByRoomId(roomId);
+    }
+
+    /* cac cach tim kiem phong
+    * */
+
+    /*
+    tìm kiếm phòng theo từ khóa
+     */
+    @GetMapping("/search")
+    @Operation(description = "search rooms by keyWord")
+    public List<RoomHotelDto> searchRoomByKeyWord(@RequestParam String keyWord, @RequestParam String hotelName){
+        return roomService.searchRoomKeyWord(keyWord, hotelName);
     }
 
 }

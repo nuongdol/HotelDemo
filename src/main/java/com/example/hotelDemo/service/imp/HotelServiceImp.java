@@ -21,9 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class HotelServiceImp implements HotelService {
-    @Autowired
     private final HotelRepository hotelRepository;
-    @Autowired
+
     private ModelMapper modelMapper;
 
     @Transactional
@@ -74,7 +73,6 @@ public class HotelServiceImp implements HotelService {
         }else{
             throw new ResourceNotFoundException("Room list with booking voucher not found");
         }
-<<<<<<< HEAD
     }
 
     @Override
@@ -82,7 +80,5 @@ public class HotelServiceImp implements HotelService {
         Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(()-> new ResourceNotFoundException("Hotel not found"));
         hotel.setHotelStatus(status);
         hotelRepository.save(hotel);
-=======
->>>>>>> e32e7fb (twelve)
     }
 }

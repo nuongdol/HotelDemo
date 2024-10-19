@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class RoomServiceImp implements RoomService {
 
     private final RoomRepository roomRepository;
+
     private final ModelMapper modelMapper;
 
     @Override
@@ -68,5 +69,10 @@ public class RoomServiceImp implements RoomService {
         } else {
             throw new ResourceNotFoundException("Room not found");
         }
+    }
+
+    @Override
+    public List<RoomHotelDto> searchRoomKeyWord(String keyWord, String hotelName) {
+        return roomRepository.findRoomsByKeyWord(keyWord, hotelName);
     }
 }

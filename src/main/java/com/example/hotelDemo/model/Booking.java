@@ -13,6 +13,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "booking")
+@Builder
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,5 +49,8 @@ public class Booking {
 
     @Column(name = "status")
     private String bookingStatus;
+
+    @Column(name = "delete_flag")
+    private Integer deleteFlag;
 
 }
