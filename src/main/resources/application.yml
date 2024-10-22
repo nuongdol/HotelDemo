@@ -19,6 +19,10 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
+  jwt:
+    secret: 36763979244226452948404D635166546A576D5A7134743777217A25432A462D
+    jwtExpirationInMs: 1800000
+
 
 
 

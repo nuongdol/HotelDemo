@@ -1,6 +1,6 @@
 package com.example.hotelDemo.sql;
 
-import org.springframework.data.jpa.repository.Query;
+
 
 public class QueryRewrite {
     //Room
@@ -99,13 +99,18 @@ public class QueryRewrite {
                     "and h.name = :hotelName";
 
     public static final String QUERY_ROOMS_BY_ADDRESS_AND_DATE =
-    "select r.name as roomName, r.type as roomType, r.capacity as roomCapacity\n" +
-            "r.price as roomPrice, r.description as roomDescription\n" +
-            "r.status as roomStatus, r.image as roomImage, h.name\n" +
-            "from hotel h join room r on r.hotel_id = h.id\n" +
-            "join booking b on b.hotel_id = h.id \n" +
-            "where h.address = :address and\n" +
-            "not (b.checkin_date >=:checkinDate AND b.checkin_date <=:checkoutDate)\n" +
-            "and\n" +
-            "not (b.checkout_date >=:checkinDate AND b.checkout_date <=:checkoutDate)";
+            "select r.name as roomName,\n " +
+                    "r.type as roomType,\n " +
+                    "r.capacity as roomCapacity,\n" +
+                    "r.price as roomPrice,\n " +
+                    "r.description as roomDescription,\n" +
+                    "r.status as roomStatus,\n" +
+                    "r.image as roomImage,\n " +
+                    "h.name\n" +
+                    "from hotel h join room r on r.hotel_id = h.id\n" +
+                    "join booking b on b.hotel_id = h.id \n" +
+                    "where h.address = :address and\n" +
+                    "not (b.checkin_date >=:checkinDate AND b.checkin_date <=:checkoutDate)\n" +
+                    "and\n" +
+                    "not (b.checkout_date >=:checkinDate AND b.checkout_date <=:checkoutDate)";
 }

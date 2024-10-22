@@ -38,6 +38,8 @@ public class User {
     @CreatedDate
     protected Date createAt;
 
+    private String role;
+
 
 
 
