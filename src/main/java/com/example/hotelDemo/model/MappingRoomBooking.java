@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MappingRoomBooking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "room_id")
     private Long roomId;
-
     @Column(name = "booking_id")
     private Long bookingId;
 

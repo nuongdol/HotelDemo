@@ -1,5 +1,6 @@
 package com.example.hotelDemo.model;
 
+import java.util.Collection;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Table(name = "role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,4 +23,6 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
+    @Column(name = "deleted_flag")
+    private Integer deletedFlag;
 }

@@ -1,16 +1,24 @@
 package com.example.hotelDemo.controller;
 
 
+import com.example.hotelDemo.exception.UserAlreadyExistException;
+import com.example.hotelDemo.model.User;
 import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
 import com.example.hotelDemo.model.dto.RoomHotelDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import com.example.hotelDemo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,5 +66,22 @@ public class UserController {
     @Operation(description = "get room list and booking voucher by userId")
     public List<IUserBookingRoomDto> getAllLstRoomWithBookingVoucher(@PathVariable Long userId) {
         return userService.getAllLstRoomWithBookingVoucherByUserId(userId);
+    }
+
+    /*sign-up link: */
+    @GetMapping("/register")
+    @Operation(description = "show register form")
+    public void register(WebRequest request, Model model){
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+    }
+
+    //check that the account doesn't already exist
+    @PostMapping("/registration")
+    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto,
+        HttpServletRequest request, Errors errors) throws UserAlreadyExistException {
+            userService.registerNewUserAccount(userDto);
+            //ModelAndView sending model data(user) tied to the view.
+        return new ModelAndView("successRegister", "user", userDto);
     }
 }

@@ -1,15 +1,20 @@
 package com.example.hotelDemo.service.imp;
 
 import com.example.hotelDemo.exception.ResourceNotFoundException;
+import com.example.hotelDemo.exception.UserAlreadyExistException;
 import com.example.hotelDemo.model.User;
 import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import com.example.hotelDemo.repository.UserRepository;
 import com.example.hotelDemo.service.UserService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,14 +37,14 @@ public class UserServiceImp implements UserService {
     @Override
     public List<UserDto> getAllLstUser() {
         return userRepository.findAll().stream()
-                .map(user -> modelMapper.map(user,UserDto.class))
-                .collect(Collectors.toList());
+            .map(user -> modelMapper.map(user, UserDto.class))
+            .collect(Collectors.toList());
     }
 
     @Override
     public UserDto getUserByUserId(Long userId) {
-        Optional<User> user = Optional.of(userRepository.findById(userId).orElseThrow(()->
-                new ResourceNotFoundException("User with id " + userId + " not found")));
+        Optional<User> user = Optional.of(userRepository.findById(userId).orElseThrow(() ->
+            new ResourceNotFoundException("User with id " + userId + " not found")));
         UserDto userDto = new UserDto();
         user.ifPresent(value -> BeanUtils.copyProperties(value, userDto));
         return userDto;
@@ -48,7 +53,7 @@ public class UserServiceImp implements UserService {
     @Override
     public void updateUser(UserDto userDto) {
         Optional<User> user = Optional.of(userRepository.findById(userDto.getUserId()).orElseThrow(
-                () -> new ResourceNotFoundException("User with id " + userDto.getUserId() + " not found")
+            () -> new ResourceNotFoundException("User with id " + userDto.getUserId() + " not found")
         ));
         User userUpdate = user.get();
         BeanUtils.copyProperties(userDto, userUpdate);
@@ -57,8 +62,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void deleteUserByUserId(Long userId) {
-        Optional<User> user = Optional.of(userRepository.findById(userId).orElseThrow(()->
-                new ResourceNotFoundException("User with id " + userId + " not found")));
+        Optional<User> user = Optional.of(userRepository.findById(userId).orElseThrow(() ->
+            new ResourceNotFoundException("User with id " + userId + " not found")));
         userRepository.deleteById(user.get().getUserId());
     }
 
@@ -66,8 +71,26 @@ public class UserServiceImp implements UserService {
     public List<IUserBookingRoomDto> getAllLstRoomWithBookingVoucherByUserId(Long userId) {
         if (userRepository.existsById(userId)) {
             return userRepository.findRoomWithBookingVoucherByUserId(userId);
-        }else {
+        } else {
             throw new ResourceNotFoundException("User not found");
         }
+    }
+
+    @Override
+    @Transactional
+    public User registerNewUserAccount(UserDto userDto) throws UserAlreadyExistException {
+        if (emailExists(userDto.getEmail())) {
+            throw new UserAlreadyExistException("There is an account with that email address: " + userDto.getEmail());
+        }
+        User user = new User();
+        user.setUserName(userDto.getUserName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setRole("ROLE_USER");
+        return userRepository.save(user);
+    }
+
+    private boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }
