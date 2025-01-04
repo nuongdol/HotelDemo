@@ -1,11 +1,14 @@
 package com.example.hotelDemo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
+import com.example.hotelDemo.enumHotel.AuthProviderEnum;
 
 @Entity
 @Setter
@@ -20,11 +23,14 @@ public class User {
     @Column(name = "id")
     Long userId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     String userName;
 
+    @Column(nullable = false)
+    @JsonIgnore
     String password;
 
+    @Column(nullable = false)
     String email;
 
     String phone;
@@ -38,12 +44,16 @@ public class User {
     @CreatedDate
     protected Date createAt;
 
-    private String role;
+    String role;
 
+    @Column(nullable = false)
+    Boolean emailVerified = false;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    AuthProviderEnum authProvider;
 
-
-
+    String providerId;
 
 }
 

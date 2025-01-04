@@ -1,8 +1,8 @@
 package com.example.hotelDemo.service.imp;
 
 
-import com.example.hotelDemo.enumHotel.EnumBooking;
-import com.example.hotelDemo.enumHotel.EnumHotel;
+import com.example.hotelDemo.enumHotel.BookingEnum;
+import com.example.hotelDemo.enumHotel.HotelEnum;
 import com.example.hotelDemo.exception.InvalidBookingRequestException;
 import com.example.hotelDemo.exception.InvalidHotelRequestException;
 import com.example.hotelDemo.exception.ResourceNotFoundException;
@@ -19,7 +19,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import static com.example.hotelDemo.enumHotel.EnumRoom.EMPTY;
+import static com.example.hotelDemo.enumHotel.RoomEnum.EMPTY;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +46,7 @@ public class BookingServiceImp implements BookingService {
     public void addNewBooking(BookingDto bookingDto) {
         Hotel hotel = hotelRepository.findById(bookingDto.getHotelId())
                 .orElseThrow(()->new ResourceNotFoundException("Hotel not found"));
-        if(Objects.equals(hotel.getHotelStatus(),EnumHotel.ACTIVITY.toString())) {
+        if(Objects.equals(hotel.getHotelStatus(), HotelEnum.ACTIVITY.toString())) {
             Booking booking = new Booking();
             List<RoomDto> rooms = bookingDto.getRooms();
             List<Booking> bookings = new ArrayList<>();
@@ -79,7 +78,7 @@ public class BookingServiceImp implements BookingService {
             if (LocalDate.now().isAfter(bookingDto.getCheckinDate()) || LocalDate.now().isBefore(bookingDto.getCheckoutDate())
                     &&
                     (LocalDate.now().isAfter(bookingDto.getCheckoutDate()) && LocalDate.now().isAfter(bookingDto.getCheckinDate()))) {
-                booking.setBookingStatus(EnumBooking.FAILED.toString());
+                booking.setBookingStatus(BookingEnum.FAILED.toString());
             }
             bookings.add(booking);
         } else {

@@ -1,12 +1,12 @@
 package com.example.hotelDemo.enumHotel;
 
-public enum EnumBooking {
+public enum HotelEnum {
 
-    SUCCESSFUL("successful"),
-    FAILED("failed");
+    ACTIVITY("existent"),
+    NON_ACTIVITY("non-existent");
     private final String status;
 
-    EnumBooking(String status) {
+    HotelEnum(String status){
         this.status = status;
     }
     @Override

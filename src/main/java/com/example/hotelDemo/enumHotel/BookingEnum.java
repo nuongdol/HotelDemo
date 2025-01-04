@@ -1,20 +1,16 @@
 package com.example.hotelDemo.enumHotel;
 
+public enum BookingEnum {
 
-public enum EnumRoom {
-    EMPTY("empty"),
-    FULL("full");
+    SUCCESSFUL("successful"),
+    FAILED("failed");
     private final String status;
 
-    EnumRoom(String status) {
+    BookingEnum(String status) {
         this.status = status;
     }
     @Override
     public String toString() {
         return status;
     }
-
-
-
-
 }
