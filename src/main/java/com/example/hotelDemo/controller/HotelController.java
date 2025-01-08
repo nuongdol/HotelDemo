@@ -50,7 +50,7 @@ public class HotelController {
         hotelService.deleteHotelById(hotelId);
     }
 
-    @GetMapping("/lst/{hotelId}")
+    @GetMapping("/lst-hotel/{hotelId}")
     @Operation(description = "Get room list with booking voucher by hotelId")
     public List<IRoomBookingDto> getAllLstRoomWithBookingVoucher(@PathVariable Long hotelId) {
         return hotelService.getAllLstRoomWithBookingVoucherByHotelId(hotelId);

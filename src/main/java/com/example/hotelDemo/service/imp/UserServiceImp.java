@@ -1,7 +1,7 @@
 package com.example.hotelDemo.service.imp;
 
 import com.example.hotelDemo.exception.ResourceNotFoundException;
-import com.example.hotelDemo.model.User;
+import com.example.hotelDemo.security.user.User;
 import com.example.hotelDemo.model.dto.IUserBookingRoomDto;
 import com.example.hotelDemo.model.dto.UserDto;
 import com.example.hotelDemo.repository.UserRepository;

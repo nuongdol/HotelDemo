@@ -1,9 +1,4 @@
 #config .yml
-# spring.application.name=hotelDemo
-<<<<<<< HEAD
-# spring.application.name=HotelDemo
-=======
->>>>>>> feature_nuong
 server:
   port: 8080
 
@@ -23,7 +18,27 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
-
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    baseline-version: 0
+  profiles:
+    active: dev
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+# define the access token paths, both private and public.
+access-token:
+  private: ${ACCESS_TOKEN_PRIVATE_KEY_PATH}
+  public: ${ACCESS_TOKEN_PUBLIC_KEY_PATH}
+#define the refresh token paths
+refresh-token:
+  private: ${REFRESH_TOKEN_PRIVATE_KEY_PATH}
+  public: ${REFRESH_TOKEN_PUBLIC_KEY_PATH}
 
 
 

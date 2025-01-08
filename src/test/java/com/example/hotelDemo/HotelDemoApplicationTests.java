@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-package com.example.HotelDemo;
-=======
-package com.example.hotelDemo;
->>>>>>> feature_nuong
 
+package com.example.HotelDemo;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
