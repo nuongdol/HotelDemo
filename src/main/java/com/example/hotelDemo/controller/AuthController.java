@@ -46,8 +46,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login loginDTO) {
-        Authentication authentication = daoAuthenticationProvider.authenticate(
-            UsernamePasswordAuthenticationToken.unauthenticated(loginDTO.getUsername(), loginDTO.getPassword()));
+        Authentication authentication = daoAuthenticationProvider.authenticate(UsernamePasswordAuthenticationToken.unauthenticated(loginDTO.getUsername(), loginDTO.getPassword()));
         return ResponseEntity.ok(tokenGenerator.createToken(authentication));
     }
     @PostMapping("/token")
