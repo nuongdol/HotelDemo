@@ -38,7 +38,7 @@ public class BookingServiceImp implements BookingService {
 
     private final MappingRoomBookingRepository mappingRoomBookingRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     private final HotelRepository hotelRepository;
 

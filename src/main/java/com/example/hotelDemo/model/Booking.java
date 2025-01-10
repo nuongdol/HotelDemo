@@ -51,5 +51,4 @@ public class Booking {
 
     @Column(name = "delete_flag")
     private Integer deleteFlag;
-
 }
