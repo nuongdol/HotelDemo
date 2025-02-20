@@ -12,6 +12,7 @@ Technical stack
 + Spring Boot 3
 + Spring Security 6
 + My SQL
++ WebSocket 
 + Kafka
 + Unit test
 *************************************************************************************
